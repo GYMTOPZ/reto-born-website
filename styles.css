@@ -44,7 +44,7 @@ body {
     margin-bottom: 20px;
     color: var(--apple-blue);
     opacity: 0;
-    transform: translateY(-50px);
+    transform: translateY(-100px);
 }
 
 .hero-subtitle {
@@ -52,7 +52,7 @@ body {
     font-weight: 400;
     color: var(--gray);
     opacity: 0;
-    transform: translateY(-50px);
+    transform: translateY(-100px);
 }
 
 /* Features */
