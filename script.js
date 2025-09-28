@@ -66,30 +66,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Handle form submission
+    // Handle form submission with Supabase
     const form = document.getElementById('waitlistForm');
     if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+
+            // Initialize Supabase client
+            const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+            // Get email from form
             const formData = new FormData(form);
+            const email = formData.get('email');
 
             try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
+                // Insert into waitlist table
+                const { data, error } = await supabase
+                    .from('waitlist')
+                    .insert([
+                        {
+                            email: email,
+                            feature: 'nutricion_inteligente',
+                            user_agent: navigator.userAgent
+                        }
+                    ]);
 
-                if (response.ok) {
-                    alert('¡Gracias! Te avisaremos cuando esté listo.');
+                if (error) {
+                    if (error.code === '23505') { // Duplicate email
+                        alert('¡Ya estás en la lista de espera! Te avisaremos cuando esté listo.');
+                    } else {
+                        console.error('Error:', error);
+                        alert('Hubo un error. Por favor intenta de nuevo.');
+                    }
+                } else {
+                    alert('¡Gracias! Te avisaremos cuando Nutrición Inteligente esté listo.');
                     form.reset();
                     closeWaitlist();
-                } else {
-                    alert('Hubo un error. Por favor intenta de nuevo.');
                 }
             } catch (error) {
+                console.error('Error:', error);
                 alert('Hubo un error. Por favor intenta de nuevo.');
             }
         });

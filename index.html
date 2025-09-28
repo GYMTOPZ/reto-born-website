@@ -7,6 +7,7 @@
     <meta name="description" content="Únete al Reto Born con Emilio Born. Rutinas personalizadas, nutrición adaptada y resultados garantizados.">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
     <!-- Hero -->
@@ -108,7 +109,7 @@
             <button class="modal-close" onclick="closeWaitlist()">&times;</button>
             <h3 class="modal-title">Lista de espera</h3>
             <p class="modal-subtitle">Sé el primero en acceder a Nutrición Inteligente</p>
-            <form id="waitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <form id="waitlistForm">
                 <input
                     type="email"
                     name="email"
@@ -122,6 +123,7 @@
         </div>
     </div>
 
+    <script src="supabase-config.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
