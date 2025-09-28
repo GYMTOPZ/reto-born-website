@@ -144,10 +144,11 @@ body {
 }
 
 .price {
-    font-size: 48px;
-    font-weight: 300;
-    margin-bottom: 60px;
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 40px;
     opacity: 0.9;
+    color: var(--white);
 }
 
 .download-buttons {
@@ -382,7 +383,7 @@ body {
     }
 
     .price {
-        font-size: 32px;
+        font-size: 24px;
     }
 
     .coming-soon-badge {
