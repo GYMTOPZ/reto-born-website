@@ -202,11 +202,11 @@ body {
 
 /* Animations */
 .fade-in {
-    animation: breatheIn 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: breatheIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .fade-in-delay {
-    animation: breatheIn 1.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.5s forwards;
+    animation: breatheIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s forwards;
 }
 
 .scroll-fade {
@@ -223,13 +223,11 @@ body {
 @keyframes breatheIn {
     from {
         opacity: 0;
-        transform: translateY(40px) scale(0.94);
-        filter: blur(8px);
+        transform: translateY(30px) scale(0.96);
     }
     to {
         opacity: 1;
         transform: translateY(0) scale(1);
-        filter: blur(0);
     }
 }
 
