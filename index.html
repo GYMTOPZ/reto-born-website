@@ -43,7 +43,7 @@
     <section class="feature">
         <div class="feature-content">
             <h2 class="feature-title scroll-fade">Nutrición inteligente</h2>
-            <span class="coming-soon-badge scroll-fade">Próximamente</span>
+            <button class="coming-soon-badge scroll-fade" onclick="openWaitlist()">Próximamente</button>
             <p class="feature-text scroll-fade">
                 Plan personalizado.<br>
                 Sin restricciones extremas.<br>
@@ -101,6 +101,26 @@
             <a href="mailto:soporte@retoborn.com">Contacto</a>
         </div>
     </footer>
+
+    <!-- Waitlist Modal -->
+    <div id="waitlistModal" class="modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeWaitlist()">&times;</button>
+            <h3 class="modal-title">Lista de espera</h3>
+            <p class="modal-subtitle">Sé el primero en acceder a Nutrición Inteligente</p>
+            <form id="waitlistForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+                <input
+                    type="email"
+                    name="email"
+                    class="modal-input"
+                    placeholder="tu@email.com"
+                    required
+                >
+                <button type="submit" class="modal-submit">Unirme</button>
+            </form>
+            <p class="modal-note">Sin spam. Solo te avisaremos cuando esté listo.</p>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>

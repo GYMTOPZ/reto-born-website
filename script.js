@@ -41,3 +41,57 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         }
     });
 });
+
+// Waitlist modal functions
+function openWaitlist() {
+    const modal = document.getElementById('waitlistModal');
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeWaitlist() {
+    const modal = document.getElementById('waitlistModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('waitlistModal');
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeWaitlist();
+            }
+        });
+    }
+
+    // Handle form submission
+    const form = document.getElementById('waitlistForm');
+    if (form) {
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    alert('¡Gracias! Te avisaremos cuando esté listo.');
+                    form.reset();
+                    closeWaitlist();
+                } else {
+                    alert('Hubo un error. Por favor intenta de nuevo.');
+                }
+            } catch (error) {
+                alert('Hubo un error. Por favor intenta de nuevo.');
+            }
+        });
+    }
+});
