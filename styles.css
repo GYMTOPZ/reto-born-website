@@ -202,11 +202,11 @@ body {
 
 /* Animations */
 .fade-in {
-    animation: fadeInUp 1s ease forwards;
+    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .fade-in-delay {
-    animation: fadeInUp 1s ease 0.3s forwards;
+    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
 }
 
 .scroll-fade {
@@ -221,9 +221,13 @@ body {
 }
 
 @keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+    }
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(-200px) scale(1);
     }
 }
 
