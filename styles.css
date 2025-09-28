@@ -361,22 +361,24 @@ body {
     }
 
     .feature-title {
-        font-size: 40px;
+        font-size: 48px;
         font-weight: 800;
         line-height: 1.1;
         margin-bottom: 30px;
+        letter-spacing: -0.03em;
     }
 
     .feature-text {
         font-size: 18px;
-        max-width: 300px;
+        max-width: 320px;
         margin: 0 auto;
         line-height: 1.5;
     }
 
     .download-title {
-        font-size: 40px;
+        font-size: 48px;
         font-weight: 800;
+        letter-spacing: -0.03em;
     }
 
     .download-content {
