@@ -10,6 +10,7 @@
     --white: #FFFFFF;
     --gray: #86868B;
     --light-gray: #F5F5F7;
+    --apple-blue: #0071E3;
 }
 
 body {
@@ -36,6 +37,7 @@ body {
     font-weight: 600;
     letter-spacing: -0.02em;
     margin-bottom: 20px;
+    color: var(--apple-blue);
     opacity: 0;
     transform: translateY(30px);
 }
@@ -73,6 +75,7 @@ body {
     letter-spacing: -0.02em;
     margin-bottom: 40px;
     line-height: 1.05;
+    color: var(--apple-blue);
 }
 
 .feature-text {
