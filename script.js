@@ -101,7 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         alert('¡Ya estás en la lista de espera! Te avisaremos cuando esté listo.');
                     } else {
                         console.error('Supabase error details:', error);
-                        alert('Error: ' + error.message);
+                        // Mostrar el error completo en el alert
+                        alert('Error detallado:\n\n' + JSON.stringify(error, null, 2));
                     }
                 } else {
                     console.log('Success! Data inserted:', data);
