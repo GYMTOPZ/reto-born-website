@@ -80,6 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const email = formData.get('email');
 
             try {
+                console.log('Attempting to insert email:', email);
+
                 // Insert into waitlist table
                 const { data, error } = await supabase
                     .from('waitlist')
@@ -89,23 +91,27 @@ document.addEventListener('DOMContentLoaded', () => {
                             feature: 'nutricion_inteligente',
                             user_agent: navigator.userAgent
                         }
-                    ]);
+                    ])
+                    .select();
+
+                console.log('Supabase response:', { data, error });
 
                 if (error) {
                     if (error.code === '23505') { // Duplicate email
                         alert('¡Ya estás en la lista de espera! Te avisaremos cuando esté listo.');
                     } else {
-                        console.error('Error:', error);
-                        alert('Hubo un error. Por favor intenta de nuevo.');
+                        console.error('Supabase error details:', error);
+                        alert('Error: ' + error.message);
                     }
                 } else {
+                    console.log('Success! Data inserted:', data);
                     alert('¡Gracias! Te avisaremos cuando Nutrición Inteligente esté listo.');
                     form.reset();
                     closeWaitlist();
                 }
             } catch (error) {
-                console.error('Error:', error);
-                alert('Hubo un error. Por favor intenta de nuevo.');
+                console.error('Catch error:', error);
+                alert('Error: ' + error.message);
             }
         });
     }
