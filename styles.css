@@ -30,12 +30,11 @@ body {
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     text-align: center;
     background: var(--white);
     position: relative;
-    padding-top: 25vh;
 }
 
 .hero-title {
