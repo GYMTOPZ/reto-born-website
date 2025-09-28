@@ -37,6 +37,17 @@ body {
     position: relative;
 }
 
+/* Canvas 3D */
+#canvas-container {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% - 150px));
+    z-index: 10;
+}
+
 .hero-title {
     font-size: 96px;
     font-weight: 700;
