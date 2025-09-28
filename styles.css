@@ -317,11 +317,12 @@ body {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .modal-submit:hover {
-    background: var(--accent-hover);
+    opacity: 0.9;
+    transform: scale(1.02);
 }
 
 .modal-note {
