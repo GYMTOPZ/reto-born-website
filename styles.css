@@ -339,7 +339,7 @@ body {
     }
 
     .hero-title {
-        font-size: 72px;
+        font-size: 64px;
         font-weight: 800;
         line-height: 1;
         letter-spacing: -0.03em;
@@ -347,7 +347,7 @@ body {
 
     .hero-subtitle {
         font-size: 20px;
-        max-width: 300px;
+        max-width: 280px;
         margin: 0 auto;
     }
 
