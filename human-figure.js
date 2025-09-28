@@ -20,7 +20,7 @@ function init3DFigure() {
         antialias: true,
         alpha: true
     });
-    renderer.setSize(200, 200);
+    renderer.setSize(300, 300);
     renderer.setPixelRatio(window.devicePixelRatio);
     container.appendChild(renderer.domElement);
 
@@ -219,6 +219,6 @@ window.addEventListener('resize', function() {
     if (camera && renderer) {
         camera.aspect = 1;
         camera.updateProjectionMatrix();
-        renderer.setSize(200, 200);
+        renderer.setSize(300, 300);
     }
 });
