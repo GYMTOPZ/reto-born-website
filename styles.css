@@ -279,6 +279,142 @@ body {
     }
 }
 
+/* Evolving title animation */
+.evolving-title {
+    background: linear-gradient(
+        45deg,
+        #FF6B6B,
+        #4ECDC4,
+        #45B7D1,
+        #96CEB4,
+        #FFEAA7,
+        #DDA5E9,
+        #6C5CE7,
+        #74B9FF
+    );
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: evolveGradient 8s ease infinite, morphPattern 10s ease-in-out infinite;
+    position: relative;
+}
+
+@keyframes evolveGradient {
+    0% {
+        background-position: 0% 50%;
+        filter: hue-rotate(0deg) brightness(1);
+    }
+    25% {
+        background-position: 50% 25%;
+        filter: hue-rotate(45deg) brightness(1.1);
+    }
+    50% {
+        background-position: 100% 50%;
+        filter: hue-rotate(90deg) brightness(0.95);
+    }
+    75% {
+        background-position: 50% 75%;
+        filter: hue-rotate(180deg) brightness(1.05);
+    }
+    100% {
+        background-position: 0% 50%;
+        filter: hue-rotate(360deg) brightness(1);
+    }
+}
+
+@keyframes morphPattern {
+    0%, 100% {
+        background-image: linear-gradient(
+            45deg,
+            #FF6B6B,
+            #4ECDC4,
+            #45B7D1,
+            #96CEB4,
+            #FFEAA7,
+            #DDA5E9,
+            #6C5CE7,
+            #74B9FF
+        );
+    }
+    20% {
+        background-image: linear-gradient(
+            120deg,
+            #667eea,
+            #764ba2,
+            #f093fb,
+            #c471f5,
+            #fa71cd,
+            #48c6ef,
+            #6f86d6,
+            #91eae4
+        );
+    }
+    40% {
+        background-image: linear-gradient(
+            -45deg,
+            #ee5a6f,
+            #f29263,
+            #ffd86f,
+            #6fc6ff,
+            #84fab0,
+            #8fd3f4,
+            #a8e6cf,
+            #ffd3b6
+        );
+    }
+    60% {
+        background-image: linear-gradient(
+            90deg,
+            #a8edea,
+            #fed6e3,
+            #ffecd2,
+            #fcb69f,
+            #ff9a9e,
+            #fad0c4,
+            #fbc2eb,
+            #a18cd1
+        );
+    }
+    80% {
+        background-image: linear-gradient(
+            180deg,
+            #30cfd0,
+            #330867,
+            #f093fb,
+            #f5576c,
+            #4facfe,
+            #00f2fe,
+            #43e97b,
+            #38f9d7
+        );
+    }
+}
+
+/* Add subtle glow effect */
+.evolving-title::before {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: -1;
+    background: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: blur(10px) opacity(0.5);
+    animation: evolveGlow 5s ease-in-out infinite;
+}
+
+@keyframes evolveGlow {
+    0%, 100% {
+        opacity: 0.3;
+    }
+    50% {
+        opacity: 0.6;
+    }
+}
+
 /* Modal */
 .modal {
     display: none;
