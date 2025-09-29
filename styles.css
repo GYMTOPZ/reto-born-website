@@ -513,11 +513,11 @@ body {
 
 @keyframes scrollInfinite {
     0% {
-        transform: translateX(0);
+        transform: translateX(100vw);
     }
     100% {
-        /* Move by exactly half the total width to create seamless loop */
-        transform: translateX(calc(-50% - 7.5px));
+        /* Move all the way across and off the left side */
+        transform: translateX(calc(-50% - 100vw));
     }
 }
 
