@@ -1,4 +1,4 @@
-// Falling Text Animation with Particle Effects
+// Falling Text Animation with Heavy Smoke Particle Effects
 function initFallingAnimation() {
     const reto = document.getElementById('reto');
     const born = document.getElementById('born');
@@ -14,28 +14,44 @@ function initFallingAnimation() {
     const particles = [];
 
     class Particle {
-        constructor(x, y) {
+        constructor(x, y, type = 'smoke') {
             this.x = x;
             this.y = y;
-            this.vx = (Math.random() - 0.5) * 8;
-            this.vy = -(Math.random() * 3 + 1);
-            this.size = Math.random() * 3 + 1;
-            this.life = 1;
-            this.decay = Math.random() * 0.01 + 0.005;
-            this.color = Math.random() > 0.5 ? '#999' : '#ddd';
+
+            if (type === 'smoke') {
+                // Smoke particles - bigger, slower, more spread
+                this.vx = (Math.random() - 0.5) * 15;
+                this.vy = -(Math.random() * 5 + 2);
+                this.size = Math.random() * 8 + 4;
+                this.life = 1;
+                this.decay = Math.random() * 0.008 + 0.003;
+                this.color = Math.random() > 0.3 ? '#888' : '#bbb';
+            } else {
+                // Debris particles - smaller, faster
+                this.vx = (Math.random() - 0.5) * 20;
+                this.vy = -(Math.random() * 8 + 4);
+                this.size = Math.random() * 3 + 1;
+                this.life = 1;
+                this.decay = Math.random() * 0.015 + 0.01;
+                this.color = '#666';
+            }
         }
 
         update() {
             this.x += this.vx;
             this.y += this.vy;
-            this.vy += 0.1; // gravity
-            this.vx *= 0.98; // friction
+            this.vy += 0.15; // gravity
+            this.vx *= 0.96; // friction
             this.life -= this.decay;
+            // Smoke expands as it rises
+            if (this.size < 15) {
+                this.size += 0.1;
+            }
         }
 
         draw(ctx) {
             ctx.save();
-            ctx.globalAlpha = this.life * 0.3;
+            ctx.globalAlpha = this.life * 0.4;
             ctx.fillStyle = this.color;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
@@ -44,15 +60,20 @@ function initFallingAnimation() {
         }
     }
 
-    // Create impact particles
+    // Create massive impact with lots of particles
     function createImpact(element) {
         const rect = element.getBoundingClientRect();
         const x = rect.left + rect.width / 2;
         const y = rect.bottom;
 
-        // Create many particles for impact effect
-        for (let i = 0; i < 50; i++) {
-            particles.push(new Particle(x, y));
+        // Create LOTS of smoke particles for heavy impact
+        for (let i = 0; i < 100; i++) {
+            particles.push(new Particle(x, y, 'smoke'));
+        }
+
+        // Add some debris particles
+        for (let i = 0; i < 30; i++) {
+            particles.push(new Particle(x, y, 'debris'));
         }
     }
 
@@ -97,35 +118,46 @@ function initFallingAnimation() {
         oscillator.stop(audioContext.currentTime + 0.3);
     }
 
-    // Falling animation function
+    // Falling animation function with 3D depth effect
     function animateFall(element, delay) {
         setTimeout(() => {
-            // Reset position
+            // Reset position - start far away (small scale) and outside view
             element.style.transition = 'none';
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(-100vh)';
+            element.style.opacity = '0.3';
+            element.style.transform = 'scale(0.1) translateZ(-1000px)';
+            element.style.filter = 'blur(5px)';
 
             // Force reflow
             element.offsetHeight;
 
-            // Animate fall
-            element.style.transition = 'transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            element.style.transform = 'translateY(0)';
-
-            // Create impact when landing
+            // Show element
             setTimeout(() => {
-                createImpact(element);
-                animateParticles();
-                playImpactSound();
+                element.style.opacity = '1';
 
-                // Small bounce effect
-                element.style.transition = 'transform 0.15s ease-out';
-                element.style.transform = 'translateY(-10px)';
+                // Animate falling towards viewer - scale up rapidly
+                element.style.transition = 'all 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+                element.style.transform = 'scale(1) translateZ(0)';
+                element.style.filter = 'blur(0px)';
 
+                // Create massive impact when landing
                 setTimeout(() => {
-                    element.style.transform = 'translateY(0)';
-                }, 150);
-            }, 600);
+                    createImpact(element);
+                    animateParticles();
+                    playImpactSound();
+
+                    // Screen shake effect
+                    document.body.style.animation = 'screenShake 0.3s';
+
+                    // Small bounce effect
+                    element.style.transition = 'transform 0.15s ease-out';
+                    element.style.transform = 'scale(1.05)';
+
+                    setTimeout(() => {
+                        element.style.transform = 'scale(1)';
+                        document.body.style.animation = '';
+                    }, 150);
+                }, 700);
+            }, 50);
         }, delay);
     }
 

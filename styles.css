@@ -57,13 +57,26 @@ body {
     color: var(--apple-blue);
     position: relative;
     z-index: 2;
+    perspective: 1000px;
 }
 
 .falling-word {
     display: inline-block;
     margin: 0 10px;
     opacity: 0;
-    transform: translateY(-100vh);
+    transform: scale(0.1) translateZ(-1000px);
+    transform-style: preserve-3d;
+}
+
+/* Screen shake animation for impact */
+@keyframes screenShake {
+    0%, 100% { transform: translateX(0); }
+    10% { transform: translateX(-4px) rotateZ(-0.5deg); }
+    20% { transform: translateX(3px) rotateZ(0.5deg); }
+    30% { transform: translateX(-3px) rotateZ(-0.5deg); }
+    40% { transform: translateX(2px) rotateZ(0.3deg); }
+    50% { transform: translateX(-2px) rotateZ(-0.3deg); }
+    60% { transform: translateX(1px); }
 }
 
 .hero-subtitle {
