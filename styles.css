@@ -181,64 +181,122 @@ body {
     color: var(--gray);
 }
 
-/* Rotating O to Apple animation */
-.rotating-o {
+/* Apple Transform Animation */
+.apple-transform {
     display: inline-block;
     position: relative;
-    animation: rotateToApple 3s infinite;
-    transform-style: preserve-3d;
-    perspective: 1000px;
-    width: 0.8em;
+    width: 0.7em;
     height: 1em;
+    margin: 0 0.05em;
     vertical-align: baseline;
-    margin: 0 -0.05em;
 }
 
-@keyframes rotateToApple {
-    0% {
-        /* Show letter o for 1 second */
-        transform: rotateY(0deg);
+/* The circular shape for both o and apple */
+.o-circle {
+    position: absolute;
+    width: 0.65em;
+    height: 0.65em;
+    border: 0.09em solid var(--apple-blue);
+    border-radius: 50%;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    animation: morphToApple 4s infinite;
+}
+
+/* The accent/leaf */
+.o-accent {
+    position: absolute;
+    width: 0.15em;
+    height: 0.2em;
+    background: var(--apple-blue);
+    border-radius: 0 100% 0 100%;
+    left: 52%;
+    top: 25%;
+    transform-origin: bottom left;
+    transform: rotate(15deg);
+    animation: accentToLeaf 4s infinite;
+}
+
+@keyframes morphToApple {
+    0%, 25% {
+        /* Show as letter o */
+        background: transparent;
+        border-color: var(--apple-blue);
+        border-width: 0.09em;
     }
-    33.33% {
-        /* Stay as o */
-        transform: rotateY(0deg);
+    35%, 40% {
+        /* Transition to apple */
+        background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
+        border-color: transparent;
+        border-width: 0;
+        transform: translate(-50%, -50%) rotateY(180deg) scale(1.1);
     }
-    50% {
-        /* Rotate to apple */
-        transform: rotateY(180deg);
+    50%, 75% {
+        /* Stay as apple */
+        background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
+        border-color: transparent;
+        border-width: 0;
+        border-radius: 50% 50% 55% 55%;
+        transform: translate(-50%, -50%) rotateY(180deg) scale(1.15);
     }
-    83.33% {
-        /* Stay as apple for 1 second */
-        transform: rotateY(180deg);
+    85%, 90% {
+        /* Transition back to o */
+        background: transparent;
+        border-color: var(--apple-blue);
+        border-width: 0.09em;
+        border-radius: 50%;
+        transform: translate(-50%, -50%) rotateY(360deg) scale(1);
     }
     100% {
-        /* Rotate back to o */
-        transform: rotateY(360deg);
+        /* Back to letter o */
+        background: transparent;
+        border-color: var(--apple-blue);
+        border-width: 0.09em;
     }
 }
 
-/* Create apple on the back side */
-.rotating-o::after {
-    content: "🍎";
-    position: absolute;
-    left: 50%;
-    top: 45%;
-    transform: translate(-50%, -50%) rotateY(180deg) scaleX(-1);
-    backface-visibility: hidden;
-    font-size: 0.9em;
-}
-
-/* Show the "ó" on front side */
-.rotating-o::before {
-    content: "ó";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    backface-visibility: hidden;
-    color: var(--apple-blue);
-    font-size: 1em;
-    font-weight: inherit;
+@keyframes accentToLeaf {
+    0%, 25% {
+        /* Accent mark */
+        width: 0.15em;
+        height: 0.2em;
+        background: var(--apple-blue);
+        border-radius: 0 100% 0 100%;
+        transform: rotate(15deg);
+    }
+    35%, 40% {
+        /* Transform to leaf */
+        width: 0.2em;
+        height: 0.15em;
+        background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%);
+        border-radius: 0 100% 0 100%;
+        transform: rotate(25deg) translateY(-0.05em);
+    }
+    50%, 75% {
+        /* Stay as leaf */
+        width: 0.2em;
+        height: 0.15em;
+        background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%);
+        border-radius: 0 100% 0 100%;
+        transform: rotate(25deg) translateY(-0.05em);
+    }
+    85%, 90% {
+        /* Transform back to accent */
+        width: 0.15em;
+        height: 0.2em;
+        background: var(--apple-blue);
+        transform: rotate(15deg);
+    }
+    100% {
+        /* Back to accent */
+        width: 0.15em;
+        height: 0.2em;
+        background: var(--apple-blue);
+        border-radius: 0 100% 0 100%;
+        transform: rotate(15deg);
+    }
 }
 
 /* Coming Soon Badge */
