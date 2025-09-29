@@ -1,7 +1,84 @@
 // Apple-style smooth animations
 
+// Typewriter effect for "Emilio siempre contigo"
+function initTypewriter() {
+    const typewriterElement = document.querySelector('.typewriter-text');
+    if (!typewriterElement) return;
+
+    const phrases = [
+        "Emilio siempre contigo",
+        "Hola Emilio! necesito ayuda con...",
+        "Emilio, qué me recomiendas si no tengo...",
+        "La rutina de hoy estuvo brutal Emilio!...",
+        "Emilio ya se me están marcando los abs!..."
+    ];
+
+    let currentPhraseIndex = 0;
+    let currentCharIndex = 0;
+    let isDeleting = false;
+    let isPaused = false;
+
+    function type() {
+        const currentPhrase = phrases[currentPhraseIndex];
+
+        if (!isDeleting) {
+            // Typing
+            typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex + 1);
+            currentCharIndex++;
+
+            if (currentCharIndex === currentPhrase.length) {
+                // Finished typing, pause then start deleting
+                isPaused = true;
+                setTimeout(() => {
+                    isPaused = false;
+                    isDeleting = true;
+                    type();
+                }, currentPhraseIndex === 0 ? 2000 : 1500); // Longer pause for main title
+                return;
+            }
+        } else {
+            // Deleting
+            typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex - 1);
+            currentCharIndex--;
+
+            if (currentCharIndex === 0) {
+                // Finished deleting, move to next phrase
+                isDeleting = false;
+                currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+
+                // Small pause before typing next phrase
+                setTimeout(() => {
+                    type();
+                }, 200);
+                return;
+            }
+        }
+
+        // Continue typing/deleting
+        const typingSpeed = isDeleting ? 30 : 50; // Faster when deleting
+        setTimeout(type, typingSpeed);
+    }
+
+    // Start the animation when element is visible
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                setTimeout(type, 500); // Start after a small delay
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    const titleElement = document.querySelector('.typewriter-title');
+    if (titleElement) {
+        observer.observe(titleElement);
+    }
+}
+
 // Fade in animations on load
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize typewriter effect
+    initTypewriter();
     // Animate hero elements
     const heroElements = document.querySelectorAll('.fade-in, .fade-in-delay');
     heroElements.forEach(el => {
