@@ -235,7 +235,7 @@ function initInteractiveCarousel() {
         if (!isDown) return;
         e.preventDefault();
         const x = e.pageX;
-        const walk = (x - startX) * 0.5; // Reduced sensitivity
+        const walk = (x - startX) * 1.2; // Medium sensitivity
         currentX = scrollLeft + walk;
         carousel.style.transform = `translateX(${currentX}px)`;
     });
@@ -254,7 +254,7 @@ function initInteractiveCarousel() {
     carousel.addEventListener('touchmove', (e) => {
         if (!isDown) return;
         const x = e.touches[0].pageX;
-        const walk = (x - startX) * 0.5; // Reduced sensitivity
+        const walk = (x - startX) * 1.2; // Medium sensitivity
         currentX = scrollLeft + walk;
         carousel.style.transform = `translateX(${currentX}px)`;
     });
