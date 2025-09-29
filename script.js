@@ -8,6 +8,40 @@ document.addEventListener('DOMContentLoaded', () => {
         el.classList.add('visible');
     });
 
+    // Hero CTA button animation on scroll back
+    let hasScrolledPastHero = false;
+    const heroCTA = document.getElementById('heroCTA');
+    const heroSection = document.querySelector('.hero');
+
+    // Create observer for hero section
+    const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting && hasScrolledPastHero) {
+                // User scrolled back to hero
+                if (heroCTA) {
+                    heroCTA.classList.add('visible');
+                    heroCTA.classList.remove('hidden');
+                }
+            }
+        });
+    }, {
+        threshold: 0.5
+    });
+
+    if (heroSection) {
+        heroObserver.observe(heroSection);
+    }
+
+    // Track when user scrolls past hero
+    window.addEventListener('scroll', () => {
+        const heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : 0;
+        const scrollPosition = window.scrollY + window.innerHeight;
+
+        if (scrollPosition > heroBottom + 100) {
+            hasScrolledPastHero = true;
+        }
+    });
+
     // Scroll animations
     const observerOptions = {
         threshold: 0.2,

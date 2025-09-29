@@ -89,6 +89,48 @@ body {
     z-index: 10; /* Keep subtitle above effects too */
 }
 
+/* Hero CTA Button */
+.hero-cta {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+}
+
+.hero-cta.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.hero-cta.hidden {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%) translateY(20px);
+}
+
+.hero-cta-text {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    color: var(--black);
+}
+
+.hero-app-store-button {
+    display: inline-block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hero-app-store-button:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
 /* Breathing animation for subtitle */
 @keyframes breathe {
     0%, 100% {
@@ -515,6 +557,19 @@ body {
         font-weight: 800;
         line-height: 1;
         letter-spacing: -0.03em;
+    }
+
+    .hero-cta {
+        bottom: 40px;
+    }
+
+    .hero-cta-text {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .hero-app-store-button img {
+        height: 45px !important;
     }
 
     .hero-subtitle {
