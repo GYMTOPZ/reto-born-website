@@ -301,7 +301,7 @@ body {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: smoothEvolve 20s linear infinite;
+    animation: smoothEvolve 10s linear infinite;
     position: relative;
 }
 
@@ -391,7 +391,7 @@ body {
 
 /* Apply second subtle animation */
 .evolving-title {
-    animation: smoothEvolve 20s linear infinite, waveShift 30s ease-in-out infinite;
+    animation: smoothEvolve 10s linear infinite, waveShift 15s ease-in-out infinite;
 }
 
 /* Modal */
