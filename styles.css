@@ -463,54 +463,60 @@ body {
     z-index: 5;
 }
 
-/* Rainbow Text Animation for Comunidad */
-.rainbow-text span {
+/* World Cities Text Animation */
+.world-cities-text span:not(.word-space) {
     display: inline-block;
     color: var(--apple-blue);
-    transition: color 0.6s ease;
+    transition: all 0.6s ease;
+    position: relative;
 }
 
-/* Define unique colors for each letter */
-.rainbow-text .letter-1 { animation: colorChange1 0.6s 0.1s forwards; }
-.rainbow-text .letter-2 { animation: colorChange2 0.6s 0.2s forwards; }
-.rainbow-text .letter-3 { animation: colorChange3 0.6s 0.3s forwards; }
-.rainbow-text .letter-4 { animation: colorChange4 0.6s 0.4s forwards; }
-.rainbow-text .letter-5 { animation: colorChange5 0.6s 0.5s forwards; }
-.rainbow-text .letter-6 { animation: colorChange6 0.6s 0.6s forwards; }
-.rainbow-text .letter-7 { animation: colorChange7 0.6s 0.7s forwards; }
-.rainbow-text .letter-8 { animation: colorChange8 0.6s 0.8s forwards; }
-.rainbow-text .letter-9 { animation: colorChange9 0.6s 0.9s forwards; }
-.rainbow-text .letter-10 { animation: colorChange10 0.6s 1.0s forwards; }
-.rainbow-text .letter-11 { animation: colorChange11 0.6s 1.1s forwards; }
-.rainbow-text .letter-12 { animation: colorChange12 0.6s 1.2s forwards; }
-.rainbow-text .letter-13 { animation: colorChange13 0.6s 1.3s forwards; }
-.rainbow-text .letter-14 { animation: colorChange14 0.6s 1.4s forwards; }
-.rainbow-text .letter-15 { animation: colorChange15 0.6s 1.5s forwards; }
-.rainbow-text .letter-16 { animation: colorChange16 0.6s 1.6s forwards; }
-.rainbow-text .letter-17 { animation: colorChange17 0.6s 1.7s forwards; }
-.rainbow-text .letter-18 { animation: colorChange18 0.6s 1.8s forwards; }
-.rainbow-text .letter-19 { animation: colorChange19 0.6s 1.9s forwards; }
+.world-cities-text .word-space {
+    display: inline-block;
+    width: 0.5em;
+}
 
-/* Color animations - each letter gets a unique, contrasting color */
-@keyframes colorChange1 { to { color: #FF006E; } } /* Hot Pink */
-@keyframes colorChange2 { to { color: #8B00FF; } } /* Violet */
-@keyframes colorChange3 { to { color: #00D9FF; } } /* Cyan */
-@keyframes colorChange4 { to { color: #FF8500; } } /* Orange */
-@keyframes colorChange5 { to { color: #00FF00; } } /* Lime */
-@keyframes colorChange6 { to { color: #FF0000; } } /* Red */
-@keyframes colorChange7 { to { color: #00A8FF; } } /* Sky Blue */
-@keyframes colorChange8 { to { color: #FFD700; } } /* Gold */
-@keyframes colorChange9 { to { color: #9D00FF; } } /* Purple */
-@keyframes colorChange10 { to { color: #FF1493; } } /* Deep Pink */
-@keyframes colorChange11 { to { color: #00CED1; } } /* Dark Turquoise */
-@keyframes colorChange12 { to { color: #FF4500; } } /* Orange Red */
-@keyframes colorChange13 { to { color: #32CD32; } } /* Lime Green */
-@keyframes colorChange14 { to { color: #FF69B4; } } /* Hot Pink Light */
-@keyframes colorChange15 { to { color: #4169E1; } } /* Royal Blue */
-@keyframes colorChange16 { to { color: #FFB600; } } /* Amber */
-@keyframes colorChange17 { to { color: #DC143C; } } /* Crimson */
-@keyframes colorChange18 { to { color: #00FA9A; } } /* Medium Spring Green */
-@keyframes colorChange19 { to { color: #FF00FF; } } /* Magenta */
+/* City-inspired colors and effects */
+.world-cities-text .city-1 { animation: parisStyle 0.6s 0.1s forwards; }
+.world-cities-text .city-2 { animation: tokyoStyle 0.6s 0.2s forwards; }
+.world-cities-text .city-3 { animation: nycStyle 0.6s 0.3s forwards; }
+.world-cities-text .city-4 { animation: londonStyle 0.6s 0.4s forwards; }
+.world-cities-text .city-5 { animation: dubaiStyle 0.6s 0.5s forwards; }
+.world-cities-text .city-6 { animation: rioStyle 0.6s 0.6s forwards; }
+.world-cities-text .city-7 { animation: sydneyStyle 0.6s 0.7s forwards; }
+.world-cities-text .city-8 { animation: romeStyle 0.6s 0.8s forwards; }
+.world-cities-text .city-9 { animation: berlinStyle 0.6s 0.9s forwards; }
+.world-cities-text .city-10 { animation: moscowStyle 0.6s 1.0s forwards; }
+.world-cities-text .city-11 { animation: cairoStyle 0.6s 1.1s forwards; }
+.world-cities-text .city-12 { animation: mumbaiStyle 0.6s 1.2s forwards; }
+.world-cities-text .city-13 { animation: beijingStyle 0.6s 1.3s forwards; }
+.world-cities-text .city-14 { animation: barcelonaStyle 0.6s 1.4s forwards; }
+.world-cities-text .city-15 { animation: istanbulStyle 0.6s 1.5s forwards; }
+.world-cities-text .city-16 { animation: mexicoStyle 0.6s 1.6s forwards; }
+.world-cities-text .city-17 { animation: seoulStyle 0.6s 1.7s forwards; }
+.world-cities-text .city-18 { animation: athensStyle 0.6s 1.8s forwards; }
+.world-cities-text .city-19 { animation: amsterdamStyle 0.6s 1.9s forwards; }
+
+/* City-specific animations with sophisticated colors */
+@keyframes parisStyle { to { color: #2C3E50; transform: rotate(-2deg); } } /* Paris - Elegant dark blue */
+@keyframes tokyoStyle { to { color: #E60012; transform: scale(1.1); } } /* Tokyo - Japanese red */
+@keyframes nycStyle { to { color: #FFA500; font-weight: 900; } } /* NYC - Taxi yellow */
+@keyframes londonStyle { to { color: #003366; transform: translateY(-2px); } } /* London - Royal navy */
+@keyframes dubaiStyle { to { color: #D4AF37; transform: scale(1.15); } } /* Dubai - Gold */
+@keyframes rioStyle { to { color: #009739; transform: rotate(3deg); } } /* Rio - Brazilian green */
+@keyframes sydneyStyle { to { color: #012169; transform: translateY(2px); } } /* Sydney - Ocean blue */
+@keyframes romeStyle { to { color: #8B4513; font-style: italic; } } /* Rome - Terracotta */
+@keyframes berlinStyle { to { color: #666666; transform: rotate(-1deg); } } /* Berlin - Industrial gray */
+@keyframes moscowStyle { to { color: #DC143C; transform: scale(1.05); } } /* Moscow - Red Square */
+@keyframes cairoStyle { to { color: #C19A6B; transform: translateY(-1px); } } /* Cairo - Desert sand */
+@keyframes mumbaiStyle { to { color: #FF6347; transform: rotate(2deg); } } /* Mumbai - Saffron */
+@keyframes beijingStyle { to { color: #DE2910; transform: scale(1.08); } } /* Beijing - Chinese red */
+@keyframes barcelonaStyle { to { color: #A50044; transform: rotate(-3deg); } } /* Barcelona - Catalan */
+@keyframes istanbulStyle { to { color: #003F87; transform: translateY(1px); } } /* Istanbul - Bosphorus blue */
+@keyframes mexicoStyle { to { color: #006847; transform: scale(1.12); } } /* Mexico - Aztec green */
+@keyframes seoulStyle { to { color: #003478; transform: rotate(1deg); } } /* Seoul - Korean blue */
+@keyframes athensStyle { to { color: #1E90FF; font-weight: 700; } } /* Athens - Mediterranean */
+@keyframes amsterdamStyle { to { color: #FF4E00; transform: rotate(-2deg); } } /* Amsterdam - Dutch orange */
 
 /* Coming Soon Badge */
 .coming-soon-badge {
