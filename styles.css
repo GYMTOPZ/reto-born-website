@@ -181,6 +181,11 @@ body {
     color: var(--gray);
 }
 
+/* Specific adjustment for Cardio section text */
+.feature.alt .feature-text {
+    margin-top: 20px;
+}
+
 /* Apple Transform Animation */
 .apple-transform {
     display: inline-block;
