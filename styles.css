@@ -91,44 +91,44 @@ body {
 
 /* Hero CTA Button */
 .hero-cta {
-    position: absolute;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 30px;
     text-align: center;
     opacity: 0;
     visibility: hidden;
     transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 10;
+    position: relative;
 }
 
 .hero-cta.visible {
     opacity: 1;
     visibility: visible;
-    transform: translateX(-50%) translateY(0);
+    transform: translateY(0);
 }
 
 .hero-cta.hidden {
     opacity: 0;
     visibility: hidden;
-    transform: translateX(-50%) translateY(20px);
-}
-
-.hero-cta-text {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 15px;
-    color: var(--black);
+    transform: translateY(20px);
 }
 
 .hero-app-store-button {
     display: inline-block;
+    margin-bottom: 12px;
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
 .hero-app-store-button:hover {
     transform: scale(1.05);
     opacity: 0.9;
+}
+
+.hero-cta-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--black);
+    margin: 0;
+    opacity: 0.8;
 }
 
 /* Breathing animation for subtitle */
@@ -560,12 +560,11 @@ body {
     }
 
     .hero-cta {
-        bottom: 40px;
+        margin-top: 25px;
     }
 
     .hero-cta-text {
-        font-size: 16px;
-        margin-bottom: 12px;
+        font-size: 14px;
     }
 
     .hero-app-store-button img {
