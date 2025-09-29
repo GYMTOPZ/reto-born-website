@@ -308,7 +308,7 @@ function initFallingAnimation() {
         const particleReduction = isMobile ? 3 : 1; // Reduce particles by 3x on mobile
 
         // Mobile vertical offset - move effects up on mobile
-        const mobileYOffset = isMobile ? -60 : 0; // Move up 60px on mobile to align with letters
+        const mobileYOffset = isMobile ? -50 : 0; // Move up 50px on mobile to align with letters
 
         // Create particles around the perimeter of the letters
         // This simulates the letter shape "exploding" outward
@@ -323,12 +323,14 @@ function initFallingAnimation() {
 
             // Smoke expanding from top edge
             if (Math.random() > (isMobile ? 0.5 : 0.6)) { // More smoke on mobile than before
-                particles.push(new Smoke(x, y, dirX, dirY));
+                const smokeY = isMobile ? y + 20 : y; // Move top smoke down 20px on mobile to close gap
+                particles.push(new Smoke(x, smokeY, dirX, dirY));
             }
 
             // Debris from edges - reduced but present on mobile
             if (Math.random() > (isMobile ? 0.7 : 0.5)) {
-                const debris = new Debris(x, y, Math.random() > 0.7 ? 'small' : 'tiny');
+                const debrisY = isMobile ? y + 20 : y; // Move top debris down 20px on mobile
+                const debris = new Debris(x, debrisY, Math.random() > 0.7 ? 'small' : 'tiny');
                 debris.vx = dirX * (Math.random() * 8 + 4);
                 debris.vy = dirY * (Math.random() * 6 + 3);
                 particles.push(debris);
@@ -345,13 +347,15 @@ function initFallingAnimation() {
 
             // Dense smoke from bottom impact - more on mobile
             if (Math.random() > (isMobile ? 0.3 : 0.2)) { // More smoke on mobile
-                particles.push(new Smoke(x, y, dirX, dirY));
+                const smokeY = isMobile ? y - 20 : y; // Move bottom smoke up 20px on mobile to close gap
+                particles.push(new Smoke(x, smokeY, dirX, dirY));
             }
 
             // More debris from bottom (main impact) - present on mobile
             if (Math.random() > (isMobile ? 0.4 : 0.2)) {
+                const debrisY = isMobile ? y - 20 : y; // Move bottom debris up 20px on mobile
                 const size = isMobile ? (Math.random() > 0.5 ? 'small' : 'tiny') : (Math.random() > 0.6 ? 'medium' : Math.random() > 0.3 ? 'small' : 'tiny');
-                const debris = new Debris(x, y, size);
+                const debris = new Debris(x, debrisY, size);
                 debris.vx = dirX * (Math.random() * (isMobile ? 6 : 10) + 5);
                 debris.vy = Math.abs(dirY) * (Math.random() * (isMobile ? 5 : 8) + 4);
                 particles.push(debris);
@@ -359,7 +363,8 @@ function initFallingAnimation() {
 
             // Dust from bottom - some on mobile
             if (Math.random() > (isMobile ? 0.7 : 0.4)) {
-                particles.push(new Dust(x + (Math.random() - 0.5) * 5, y));
+                const dustY = isMobile ? y - 20 : y; // Move dust up on mobile
+                particles.push(new Dust(x + (Math.random() - 0.5) * 5, dustY));
             }
         }
 
