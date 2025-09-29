@@ -64,7 +64,7 @@ body {
     display: inline-block;
     margin: 0 10px;
     opacity: 0;
-    transform: scale(0.1) translateZ(-1000px);
+    transform: scale(10) translateZ(500px);
     transform-style: preserve-3d;
 }
 

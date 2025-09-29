@@ -118,14 +118,14 @@ function initFallingAnimation() {
         oscillator.stop(audioContext.currentTime + 0.3);
     }
 
-    // Falling animation function with 3D depth effect
+    // Falling animation function - coming from viewer towards screen
     function animateFall(element, delay) {
         setTimeout(() => {
-            // Reset position - start far away (small scale) and outside view
+            // Reset position - start HUGE (close to viewer) and outside view
             element.style.transition = 'none';
-            element.style.opacity = '0.3';
-            element.style.transform = 'scale(0.1) translateZ(-1000px)';
-            element.style.filter = 'blur(5px)';
+            element.style.opacity = '0';
+            element.style.transform = 'scale(10) translateZ(500px)';
+            element.style.filter = 'blur(10px)';
 
             // Force reflow
             element.offsetHeight;
@@ -134,8 +134,8 @@ function initFallingAnimation() {
             setTimeout(() => {
                 element.style.opacity = '1';
 
-                // Animate falling towards viewer - scale up rapidly
-                element.style.transition = 'all 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+                // Animate falling INTO the screen - scale down to normal size
+                element.style.transition = 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
                 element.style.transform = 'scale(1) translateZ(0)';
                 element.style.filter = 'blur(0px)';
 
@@ -148,15 +148,16 @@ function initFallingAnimation() {
                     // Screen shake effect
                     document.body.style.animation = 'screenShake 0.3s';
 
-                    // Small bounce effect
-                    element.style.transition = 'transform 0.15s ease-out';
-                    element.style.transform = 'scale(1.05)';
+                    // Small bounce effect after impact
+                    element.style.transition = 'transform 0.15s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+                    element.style.transform = 'scale(0.95)';
 
                     setTimeout(() => {
+                        element.style.transition = 'transform 0.2s ease-out';
                         element.style.transform = 'scale(1)';
                         document.body.style.animation = '';
                     }, 150);
-                }, 700);
+                }, 800);
             }, 50);
         }, delay);
     }
