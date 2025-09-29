@@ -139,21 +139,28 @@ function initFallingAnimation() {
     function createImpact(element) {
         const rect = element.getBoundingClientRect();
         const x = rect.left + rect.width / 2;
-        const y = rect.bottom;
+        // Impact from the actual bottom of the letters, not below
+        const y = rect.bottom - 5; // Slightly higher impact point
+
+        // Check if mobile
+        const isMobile = window.innerWidth <= 768;
+        const spread = isMobile ? 30 : 40;
+        const smokeSpread = isMobile ? 40 : 60;
+        const dustSpread = isMobile ? 50 : 80;
 
         // Create debris/rocks flying from impact
         for (let i = 0; i < 20; i++) {
-            particles.push(new Debris(x + (Math.random() - 0.5) * 40, y));
+            particles.push(new Debris(x + (Math.random() - 0.5) * spread, y));
         }
 
-        // Create dense smoke cloud
+        // Create dense smoke cloud - positioned at letter base
         for (let i = 0; i < 40; i++) {
-            particles.push(new Smoke(x + (Math.random() - 0.5) * 60, y + Math.random() * 20));
+            particles.push(new Smoke(x + (Math.random() - 0.5) * smokeSpread, y - Math.random() * 10));
         }
 
         // Create dust particles for extra detail
         for (let i = 0; i < 60; i++) {
-            particles.push(new Dust(x + (Math.random() - 0.5) * 80, y + Math.random() * 10));
+            particles.push(new Dust(x + (Math.random() - 0.5) * dustSpread, y - Math.random() * 5));
         }
 
         // Create crater-like effect with more particles at impact point
