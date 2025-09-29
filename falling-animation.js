@@ -80,8 +80,12 @@ function initFallingAnimation() {
         }
 
         draw(ctx) {
+            // Smooth fade for debris too
+            const smoothLife = this.life * this.life;
+            if (smoothLife < 0.01) return; // Don't render if too faint
+
             ctx.save();
-            ctx.globalAlpha = this.life;
+            ctx.globalAlpha = smoothLife;
             ctx.translate(this.x, this.y);
             ctx.rotate(this.rotation);
 
@@ -221,8 +225,14 @@ function initFallingAnimation() {
         }
 
         draw(ctx) {
+            // Smooth fade curve - ease out the opacity
+            const smoothLife = this.life * this.life; // Quadratic easing for smoother fade
+
+            // Don't render if too faint (prevents flicker at the end)
+            if (smoothLife < 0.02) return;
+
             ctx.save();
-            ctx.globalAlpha = this.life * 0.4; // Less opaque smoke
+            ctx.globalAlpha = smoothLife * 0.4; // Use smoothed life value
 
             // Create multi-layered gradient for dense, realistic smoke
             const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
@@ -236,14 +246,16 @@ function initFallingAnimation() {
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
 
-            // Add inner core for denser appearance
-            const coreGradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 0.5);
-            coreGradient.addColorStop(0, this.color.replace(/[0-9.]+\)/, '0.3)'));
-            coreGradient.addColorStop(1, 'transparent');
-            ctx.fillStyle = coreGradient;
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size * 0.5, 0, Math.PI * 2);
-            ctx.fill();
+            // Add inner core for denser appearance (also with smooth fade)
+            if (smoothLife > 0.1) { // Only draw core if visible enough
+                const coreGradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 0.5);
+                coreGradient.addColorStop(0, this.color.replace(/[0-9.]+\)/, '0.2)'));
+                coreGradient.addColorStop(1, 'transparent');
+                ctx.fillStyle = coreGradient;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size * 0.5, 0, Math.PI * 2);
+                ctx.fill();
+            }
 
             ctx.restore();
         }
@@ -271,8 +283,12 @@ function initFallingAnimation() {
         }
 
         draw(ctx) {
+            // Smooth fade for dust particles
+            const smoothLife = this.life * this.life;
+            if (smoothLife < 0.01) return; // Don't render if too faint
+
             ctx.save();
-            ctx.globalAlpha = this.life;
+            ctx.globalAlpha = smoothLife;
             ctx.fillStyle = this.color;
             ctx.fillRect(this.x - this.size/2, this.y - this.size/2, this.size, this.size);
             ctx.restore();
@@ -465,7 +481,8 @@ function initFallingAnimation() {
             particle.update();
             particle.draw(ctx);
 
-            if (particle.life <= 0) {
+            // Remove particles when they're truly invisible
+            if (particle.life <= 0.01) {
                 particles.splice(i, 1);
             }
         }
