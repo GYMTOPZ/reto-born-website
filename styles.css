@@ -475,13 +475,21 @@ body {
     z-index: 1;
 }
 
-/* Slide out left when carousel starts */
+/* Slide out left gradually with carousel */
 .slide-out-left {
-    animation: slideToLeft 2s ease-out 2s forwards;
+    animation: slideToLeft 3s ease-in-out 2s forwards;
 }
 
 @keyframes slideToLeft {
-    to {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(-100px);
+        opacity: 0.5;
+    }
+    100% {
         transform: translateX(-200%);
         opacity: 0;
     }
@@ -490,7 +498,7 @@ body {
 /* Before/After Carousel - Full width */
 .before-after-carousel {
     position: absolute;
-    top: 55%;
+    top: 65%;
     left: 0;
     width: 100%;
     transform: translateY(-50%);
@@ -1112,7 +1120,7 @@ body {
     /* Before/After Carousel Mobile Adjustments */
     .before-after-carousel {
         height: 70px;
-        top: 58%;
+        top: 68%;
     }
 
     .transformation-card {
