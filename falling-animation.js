@@ -307,6 +307,9 @@ function initFallingAnimation() {
         const isMobile = window.innerWidth <= 768;
         const particleReduction = isMobile ? 3 : 1; // Reduce particles by 3x on mobile
 
+        // Mobile vertical offset - move effects up on mobile
+        const mobileYOffset = isMobile ? -40 : 0; // Move up 40px on mobile
+
         // Create particles around the perimeter of the letters
         // This simulates the letter shape "exploding" outward
 
@@ -314,7 +317,7 @@ function initFallingAnimation() {
         const topStep = isMobile ? 10 : 8; // Moderate reduction on mobile
         for (let i = 0; i < width; i += topStep) {
             const x = rect.left + i;
-            const y = rect.top;
+            const y = rect.top + mobileYOffset;
             const dirX = (x - centerX) / width;
             const dirY = -1; // Upward from top
 
@@ -336,7 +339,7 @@ function initFallingAnimation() {
         const bottomStep = isMobile ? 8 : 6; // Better coverage on mobile
         for (let i = 0; i < width; i += bottomStep) {
             const x = rect.left + i;
-            const y = rect.bottom;
+            const y = rect.bottom + mobileYOffset;
             const dirX = (x - centerX) / width;
             const dirY = 1; // Downward from bottom
 
@@ -364,7 +367,7 @@ function initFallingAnimation() {
         const leftStep = isMobile ? 16 : 12;
         for (let i = 0; i < height; i += leftStep) {
             const x = rect.left;
-            const y = rect.top + i;
+            const y = rect.top + i + mobileYOffset;
             const dirX = -1; // Leftward from left edge
             const dirY = (y - centerY) / height;
 
@@ -386,7 +389,7 @@ function initFallingAnimation() {
         const rightStep = isMobile ? 16 : 12;
         for (let i = 0; i < height; i += rightStep) {
             const x = rect.right;
-            const y = rect.top + i;
+            const y = rect.top + i + mobileYOffset;
             const dirX = 1; // Rightward from right edge
             const dirY = (y - centerY) / height;
 
@@ -406,10 +409,10 @@ function initFallingAnimation() {
 
         // Add corner emphasis - corners explode more dramatically
         const corners = [
-            {x: rect.left, y: rect.top, dirX: -1, dirY: -1}, // Top-left
-            {x: rect.right, y: rect.top, dirX: 1, dirY: -1}, // Top-right
-            {x: rect.left, y: rect.bottom, dirX: -1, dirY: 1}, // Bottom-left
-            {x: rect.right, y: rect.bottom, dirX: 1, dirY: 1} // Bottom-right
+            {x: rect.left, y: rect.top + mobileYOffset, dirX: -1, dirY: -1}, // Top-left
+            {x: rect.right, y: rect.top + mobileYOffset, dirX: 1, dirY: -1}, // Top-right
+            {x: rect.left, y: rect.bottom + mobileYOffset, dirX: -1, dirY: 1}, // Bottom-left
+            {x: rect.right, y: rect.bottom + mobileYOffset, dirX: 1, dirY: 1} // Bottom-right
         ];
 
         corners.forEach(corner => {
@@ -448,25 +451,25 @@ function initFallingAnimation() {
             if (distance < width) {
                 // Top edge
                 x = rect.left + distance;
-                y = rect.top;
+                y = rect.top + mobileYOffset;
                 dirX = (x - centerX) / width;
                 dirY = -1;
             } else if (distance < width + height) {
                 // Right edge
                 x = rect.right;
-                y = rect.top + (distance - width);
+                y = rect.top + (distance - width) + mobileYOffset;
                 dirX = 1;
                 dirY = (y - centerY) / height;
             } else if (distance < width * 2 + height) {
                 // Bottom edge
                 x = rect.right - (distance - width - height);
-                y = rect.bottom;
+                y = rect.bottom + mobileYOffset;
                 dirX = (x - centerX) / width;
                 dirY = 1;
             } else {
                 // Left edge
                 x = rect.left;
-                y = rect.bottom - (distance - width * 2 - height);
+                y = rect.bottom - (distance - width * 2 - height) + mobileYOffset;
                 dirX = -1;
                 dirY = (y - centerY) / height;
             }
