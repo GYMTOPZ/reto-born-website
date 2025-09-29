@@ -13,29 +13,69 @@ function initFallingAnimation() {
     // Particle system
     const particles = [];
 
-    // Debris/Rock particle class
+    // Debris/Rock particle class - Realistic concrete chunks
     class Debris {
-        constructor(x, y) {
+        constructor(x, y, size = 'medium') {
             this.x = x;
             this.y = y;
-            this.vx = (Math.random() - 0.5) * 25;
-            this.vy = -(Math.random() * 12 + 8);
-            this.width = Math.random() * 8 + 3;
-            this.height = Math.random() * 6 + 2;
+
+            // Slower, heavier movement for realistic concrete
+            this.vx = (Math.random() - 0.5) * 12; // Even slower horizontal spread
+            this.vy = -(Math.random() * 6 + 3); // Less explosive upward velocity
+
+            // Much more varied sizes for realistic concrete chunks
+            const sizeMultiplier = Math.random();
+            if (size === 'large') {
+                this.width = Math.random() * 20 + 15;
+                this.height = Math.random() * 18 + 12;
+            } else if (size === 'small') {
+                this.width = Math.random() * 8 + 3;
+                this.height = Math.random() * 7 + 3;
+            } else if (size === 'tiny') {
+                this.width = Math.random() * 4 + 1;
+                this.height = Math.random() * 3 + 1;
+            } else {
+                this.width = Math.random() * 14 + 6;
+                this.height = Math.random() * 12 + 5;
+            }
+
+            // Add depth for 3D appearance
+            this.depth = Math.random() * 4 + 2;
+
             this.rotation = Math.random() * Math.PI * 2;
-            this.rotationSpeed = (Math.random() - 0.5) * 0.4;
+            this.rotationSpeed = (Math.random() - 0.5) * 0.15; // Even slower rotation
             this.life = 1;
-            this.decay = Math.random() * 0.01 + 0.005;
-            // White/gray rocks from the white floor
-            this.color = Math.random() > 0.5 ? '#e8e8e8' : '#d0d0d0';
+            this.decay = Math.random() * 0.004 + 0.002; // Slower decay for longer visibility
+
+            // More realistic concrete colors with variation
+            const colors = [
+                '#f5f5f5', '#e8e8e8', '#dedede', '#d0d0d0',
+                '#c5c5c5', '#b8b8b8', '#a8a8a8', '#f0f0f0'
+            ];
+            this.color = colors[Math.floor(Math.random() * colors.length)];
+
+            // Add a darker shade for depth
+            const grayValue = parseInt(this.color.substring(1, 3), 16);
+            const darkerGray = Math.max(grayValue - 30, 100);
+            this.shadowColor = `rgb(${darkerGray}, ${darkerGray}, ${darkerGray})`;
+
+            // Shape type for variety - more options
+            this.shapeType = Math.floor(Math.random() * 5);
+
+            // Add irregularity to shapes
+            this.irregularity = [];
+            for (let i = 0; i < 8; i++) {
+                this.irregularity.push(Math.random() * 0.3 + 0.85);
+            }
         }
 
         update() {
             this.x += this.vx;
             this.y += this.vy;
-            this.vy += 0.5; // gravity
-            this.vx *= 0.98; // friction
+            this.vy += 0.8; // Heavier gravity for concrete chunks
+            this.vx *= 0.94; // More air resistance
             this.rotation += this.rotationSpeed;
+            this.rotationSpeed *= 0.98; // Rotation slows down
             this.life -= this.decay;
         }
 
@@ -44,63 +84,167 @@ function initFallingAnimation() {
             ctx.globalAlpha = this.life;
             ctx.translate(this.x, this.y);
             ctx.rotate(this.rotation);
-            ctx.fillStyle = this.color;
-            // Draw irregular rock shape
+
+            // Draw shadow first for depth
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
             ctx.beginPath();
-            ctx.moveTo(-this.width/2, -this.height/2);
-            ctx.lineTo(this.width/3, -this.height/2);
-            ctx.lineTo(this.width/2, this.height/3);
-            ctx.lineTo(-this.width/3, this.height/2);
-            ctx.closePath();
+            this.drawShape(ctx, 3, 3, 1.1);
             ctx.fill();
 
-            // Add shadow for depth
-            ctx.fillStyle = 'rgba(0,0,0,0.2)';
-            ctx.fillRect(-this.width/2 + 1, -this.height/2 + 1, this.width, this.height);
+            // Draw main chunk with gradient for 3D effect
+            const gradient = ctx.createLinearGradient(-this.width/2, -this.height/2, this.width/2, this.height/2);
+            gradient.addColorStop(0, this.color);
+            gradient.addColorStop(0.5, this.shadowColor);
+            gradient.addColorStop(1, this.color);
+            ctx.fillStyle = gradient;
+
+            ctx.beginPath();
+            this.drawShape(ctx, 0, 0, 1);
+            ctx.fill();
+
+            // Add cracks and texture
+            ctx.strokeStyle = 'rgba(0,0,0,0.15)';
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+
+            // Add small crack details
+            if (this.width > 10) {
+                ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+                ctx.lineWidth = 0.3;
+                ctx.beginPath();
+                ctx.moveTo(-this.width/4, 0);
+                ctx.lineTo(this.width/4, this.height/4);
+                ctx.stroke();
+            }
 
             ctx.restore();
         }
+
+        drawShape(ctx, offsetX, offsetY, scale) {
+            const w = this.width * scale;
+            const h = this.height * scale;
+            const x = offsetX;
+            const y = offsetY;
+
+            if (this.shapeType === 0) {
+                // Irregular rectangular chunk
+                ctx.moveTo(x - w/2 * this.irregularity[0], y - h/2 * this.irregularity[1]);
+                ctx.lineTo(x + w/2 * this.irregularity[2], y - h/2 * this.irregularity[3]);
+                ctx.lineTo(x + w/2 * this.irregularity[4], y + h/2 * this.irregularity[5]);
+                ctx.lineTo(x - w/2 * this.irregularity[6], y + h/2 * this.irregularity[7]);
+            } else if (this.shapeType === 1) {
+                // Sharp triangular shard
+                ctx.moveTo(x - w/2, y + h/2);
+                ctx.lineTo(x + w/2 * this.irregularity[0], y + h/2);
+                ctx.lineTo(x + w/6 * this.irregularity[1], y - h/2);
+            } else if (this.shapeType === 2) {
+                // Irregular pentagon
+                ctx.moveTo(x - w/2 * this.irregularity[0], y - h/3);
+                ctx.lineTo(x - w/3 * this.irregularity[1], y - h/2);
+                ctx.lineTo(x + w/3 * this.irregularity[2], y - h/2 * this.irregularity[3]);
+                ctx.lineTo(x + w/2, y + h/4);
+                ctx.lineTo(x, y + h/2 * this.irregularity[4]);
+                ctx.lineTo(x - w/3, y + h/3);
+            } else if (this.shapeType === 3) {
+                // Jagged chunk
+                ctx.moveTo(x - w/2, y);
+                ctx.lineTo(x - w/3 * this.irregularity[0], y - h/2);
+                ctx.lineTo(x, y - h/3 * this.irregularity[1]);
+                ctx.lineTo(x + w/4, y - h/2 * this.irregularity[2]);
+                ctx.lineTo(x + w/2 * this.irregularity[3], y);
+                ctx.lineTo(x + w/3, y + h/2 * this.irregularity[4]);
+                ctx.lineTo(x - w/4, y + h/2);
+            } else {
+                // Complex irregular polygon
+                const points = 6 + Math.floor(Math.random() * 3);
+                for (let i = 0; i < points; i++) {
+                    const angle = (Math.PI * 2 / points) * i;
+                    const radius = (Math.max(w, h) / 2) * this.irregularity[i % this.irregularity.length];
+                    const px = x + Math.cos(angle) * radius;
+                    const py = y + Math.sin(angle) * radius * 0.8;
+                    if (i === 0) ctx.moveTo(px, py);
+                    else ctx.lineTo(px, py);
+                }
+            }
+            ctx.closePath();
+        }
     }
 
-    // Smoke particle class
+    // Smoke particle class - Expands outward from letter edges
     class Smoke {
-        constructor(x, y) {
+        constructor(x, y, directionX = 0, directionY = 0) {
             this.x = x;
             this.y = y;
-            this.vx = (Math.random() - 0.5) * 8;
-            this.vy = -(Math.random() * 3 + 1);
-            this.size = Math.random() * 15 + 10;
+            // If direction provided, use it for outward expansion
+            if (directionX !== 0 || directionY !== 0) {
+                // Normalize and apply outward force
+                const magnitude = Math.sqrt(directionX * directionX + directionY * directionY);
+                this.vx = (directionX / magnitude) * (Math.random() * 3 + 2); // Outward expansion
+                this.vy = (directionY / magnitude) * (Math.random() * 3 + 2);
+            } else {
+                // Fallback to radial expansion
+                this.vx = (Math.random() - 0.5) * 4;
+                this.vy = (Math.random() - 0.5) * 4;
+            }
+
+            this.size = Math.random() * 30 + 25; // Big, dense smoke clouds
             this.life = 1;
-            this.decay = Math.random() * 0.006 + 0.002;
-            // Gradient of smoke colors
-            const smokeColors = ['rgba(150,150,150,0.4)', 'rgba(180,180,180,0.3)', 'rgba(200,200,200,0.3)', 'rgba(220,220,220,0.2)'];
+            this.decay = Math.random() * 0.0015 + 0.001; // Very slow fade
+            // Denser smoke colors
+            const smokeColors = [
+                'rgba(140,140,140,0.7)',
+                'rgba(160,160,160,0.6)',
+                'rgba(180,180,180,0.55)',
+                'rgba(200,200,200,0.5)',
+                'rgba(170,170,170,0.65)'
+            ];
             this.color = smokeColors[Math.floor(Math.random() * smokeColors.length)];
+            this.turbulence = Math.random() * 0.3;
         }
 
         update() {
+            // Smoke expands outward, not upward
             this.x += this.vx;
             this.y += this.vy;
-            this.vy -= 0.05; // smoke rises
-            this.vx *= 0.99; // friction
+
+            // Slow down but keep expanding outward
+            this.vx *= 0.96;
+            this.vy *= 0.96;
+
+            // Add slight turbulence
+            this.x += Math.sin(this.life * 2) * this.turbulence;
+            this.y += Math.cos(this.life * 2) * this.turbulence * 0.5;
+
             this.life -= this.decay;
-            // Smoke expands as it rises
-            this.size += 0.3;
+            // Smoke expands as it moves outward
+            this.size += 0.25;
         }
 
         draw(ctx) {
             ctx.save();
-            ctx.globalAlpha = this.life * 0.6;
+            ctx.globalAlpha = this.life * 0.7; // More opaque smoke
 
-            // Create gradient for more realistic smoke
+            // Create multi-layered gradient for dense, realistic smoke
             const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
             gradient.addColorStop(0, this.color);
-            gradient.addColorStop(0.4, this.color.replace('0.4', '0.2').replace('0.3', '0.15').replace('0.2', '0.1'));
+            gradient.addColorStop(0.3, this.color.replace(/[0-9.]+\)/, '0.3)'));
+            gradient.addColorStop(0.6, this.color.replace(/[0-9.]+\)/, '0.15)'));
             gradient.addColorStop(1, 'transparent');
 
             ctx.fillStyle = gradient;
             ctx.beginPath();
             ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
+
+            // Add inner core for denser appearance
+            const coreGradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size * 0.5);
+            coreGradient.addColorStop(0, this.color.replace(/[0-9.]+\)/, '0.3)'));
+            coreGradient.addColorStop(1, 'transparent');
+            ctx.fillStyle = coreGradient;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size * 0.5, 0, Math.PI * 2);
+            ctx.fill();
+
             ctx.restore();
         }
     }
@@ -135,37 +279,178 @@ function initFallingAnimation() {
         }
     }
 
-    // Create massive impact with lots of particles
+    // Create impact effect that follows letter shape
     function createImpact(element) {
         const rect = element.getBoundingClientRect();
-        const x = rect.left + rect.width / 2;
-        // Impact from the actual bottom of the letters, not below
-        const y = rect.bottom - 5; // Slightly higher impact point
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const width = rect.width;
+        const height = rect.height;
 
         // Check if mobile
         const isMobile = window.innerWidth <= 768;
-        const spread = isMobile ? 30 : 40;
-        const smokeSpread = isMobile ? 40 : 60;
-        const dustSpread = isMobile ? 50 : 80;
+        const particleDensity = isMobile ? 0.7 : 1;
 
-        // Create debris/rocks flying from impact
-        for (let i = 0; i < 20; i++) {
-            particles.push(new Debris(x + (Math.random() - 0.5) * spread, y));
+        // Create particles around the perimeter of the letters
+        // This simulates the letter shape "exploding" outward
+
+        // Top edge particles
+        for (let i = 0; i < width; i += 4) {
+            const x = rect.left + i;
+            const y = rect.top;
+            const dirX = (x - centerX) / width;
+            const dirY = -1; // Upward from top
+
+            // Smoke expanding from top edge
+            if (Math.random() > 0.3) {
+                particles.push(new Smoke(x, y, dirX, dirY));
+            }
+
+            // Debris from edges
+            if (Math.random() > 0.5) {
+                const debris = new Debris(x, y, Math.random() > 0.7 ? 'small' : 'tiny');
+                debris.vx = dirX * (Math.random() * 8 + 4);
+                debris.vy = dirY * (Math.random() * 6 + 3);
+                particles.push(debris);
+            }
         }
 
-        // Create dense smoke cloud - positioned at letter base
-        for (let i = 0; i < 40; i++) {
-            particles.push(new Smoke(x + (Math.random() - 0.5) * smokeSpread, y - Math.random() * 10));
+        // Bottom edge particles - MOST INTENSE
+        for (let i = 0; i < width; i += 3) {
+            const x = rect.left + i;
+            const y = rect.bottom;
+            const dirX = (x - centerX) / width;
+            const dirY = 1; // Downward from bottom
+
+            // Dense smoke from bottom impact
+            particles.push(new Smoke(x, y, dirX, dirY));
+
+            // More debris from bottom (main impact)
+            if (Math.random() > 0.2) {
+                const size = Math.random() > 0.6 ? 'medium' : Math.random() > 0.3 ? 'small' : 'tiny';
+                const debris = new Debris(x, y, size);
+                debris.vx = dirX * (Math.random() * 10 + 5);
+                debris.vy = Math.abs(dirY) * (Math.random() * 8 + 4);
+                particles.push(debris);
+            }
+
+            // Extra dust from bottom
+            if (Math.random() > 0.4) {
+                particles.push(new Dust(x + (Math.random() - 0.5) * 5, y));
+            }
         }
 
-        // Create dust particles for extra detail
-        for (let i = 0; i < 60; i++) {
-            particles.push(new Dust(x + (Math.random() - 0.5) * dustSpread, y - Math.random() * 5));
+        // Left edge particles
+        for (let i = 0; i < height; i += 4) {
+            const x = rect.left;
+            const y = rect.top + i;
+            const dirX = -1; // Leftward from left edge
+            const dirY = (y - centerY) / height;
+
+            // Smoke from left edge
+            if (Math.random() > 0.4) {
+                particles.push(new Smoke(x, y, dirX, dirY));
+            }
+
+            // Debris from left edge
+            if (Math.random() > 0.6) {
+                const debris = new Debris(x, y, 'tiny');
+                debris.vx = dirX * (Math.random() * 8 + 4);
+                debris.vy = dirY * (Math.random() * 6 + 2);
+                particles.push(debris);
+            }
         }
 
-        // Create crater-like effect with more particles at impact point
-        for (let i = 0; i < 15; i++) {
-            particles.push(new Debris(x, y));
+        // Right edge particles
+        for (let i = 0; i < height; i += 4) {
+            const x = rect.right;
+            const y = rect.top + i;
+            const dirX = 1; // Rightward from right edge
+            const dirY = (y - centerY) / height;
+
+            // Smoke from right edge
+            if (Math.random() > 0.4) {
+                particles.push(new Smoke(x, y, dirX, dirY));
+            }
+
+            // Debris from right edge
+            if (Math.random() > 0.6) {
+                const debris = new Debris(x, y, 'tiny');
+                debris.vx = dirX * (Math.random() * 8 + 4);
+                debris.vy = dirY * (Math.random() * 6 + 2);
+                particles.push(debris);
+            }
+        }
+
+        // Add corner emphasis - corners explode more dramatically
+        const corners = [
+            {x: rect.left, y: rect.top, dirX: -1, dirY: -1}, // Top-left
+            {x: rect.right, y: rect.top, dirX: 1, dirY: -1}, // Top-right
+            {x: rect.left, y: rect.bottom, dirX: -1, dirY: 1}, // Bottom-left
+            {x: rect.right, y: rect.bottom, dirX: 1, dirY: 1} // Bottom-right
+        ];
+
+        corners.forEach(corner => {
+            // Extra smoke at corners
+            for (let i = 0; i < 5; i++) {
+                particles.push(new Smoke(
+                    corner.x + (Math.random() - 0.5) * 5,
+                    corner.y + (Math.random() - 0.5) * 5,
+                    corner.dirX,
+                    corner.dirY
+                ));
+            }
+
+            // Extra debris at corners
+            for (let i = 0; i < 8; i++) {
+                const size = ['small', 'tiny', 'medium'][Math.floor(Math.random() * 3)];
+                const debris = new Debris(corner.x, corner.y, size);
+                debris.vx = corner.dirX * (Math.random() * 12 + 6);
+                debris.vy = corner.dirY * (Math.random() * 10 + 5);
+                particles.push(debris);
+            }
+        });
+
+        // Create a "shockwave" of dust that follows the letter outline
+        const outlinePoints = Math.floor((width * 2 + height * 2) / 5);
+        for (let i = 0; i < outlinePoints; i++) {
+            const progress = i / outlinePoints;
+            const perimeter = (width + height) * 2;
+            const distance = progress * perimeter;
+
+            let x, y, dirX, dirY;
+
+            if (distance < width) {
+                // Top edge
+                x = rect.left + distance;
+                y = rect.top;
+                dirX = (x - centerX) / width;
+                dirY = -1;
+            } else if (distance < width + height) {
+                // Right edge
+                x = rect.right;
+                y = rect.top + (distance - width);
+                dirX = 1;
+                dirY = (y - centerY) / height;
+            } else if (distance < width * 2 + height) {
+                // Bottom edge
+                x = rect.right - (distance - width - height);
+                y = rect.bottom;
+                dirX = (x - centerX) / width;
+                dirY = 1;
+            } else {
+                // Left edge
+                x = rect.left;
+                y = rect.bottom - (distance - width * 2 - height);
+                dirX = -1;
+                dirY = (y - centerY) / height;
+            }
+
+            // Dust particles following outline
+            const dust = new Dust(x, y);
+            dust.vx = dirX * (Math.random() * 15 + 10);
+            dust.vy = dirY * (Math.random() * 15 + 10);
+            particles.push(dust);
         }
     }
 
