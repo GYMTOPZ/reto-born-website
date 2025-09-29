@@ -436,95 +436,156 @@ body {
     animation: smoothEvolve 10s linear infinite, waveShift 15s ease-in-out infinite;
 }
 
-/* Morphing title animation for "Emilio siempre contigo" */
-.morphing-title {
-    animation: fluidMorph 8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
-    transform-origin: center center;
+/* AI Alive title animation for "Emilio siempre contigo" */
+.ai-alive-title {
+    position: relative;
     display: inline-block;
+    animation:
+        aiBreathing 4s ease-in-out infinite,
+        subtleGlow 6s ease-in-out infinite;
+    transform-origin: center center;
 }
 
-@keyframes fluidMorph {
-    /* Brief pause to read the words */
-    0%, 15% {
-        transform: scale(1) rotate(0deg);
-        letter-spacing: 0;
-        filter: blur(0px);
-        opacity: 1;
-    }
+/* 1. Breathing effect */
+@keyframes aiBreathing {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
 
-    /* Start morphing - continuous fluid motion */
-    25% {
-        transform: scale(1.1, 0.9) rotate(10deg);
-        letter-spacing: -0.1em;
-        filter: blur(0.8px);
-        opacity: 0.95;
+/* 2. Glow/Aura effect */
+@keyframes subtleGlow {
+    0%, 100% {
+        text-shadow:
+            0 0 10px rgba(0, 123, 255, 0),
+            0 0 20px rgba(0, 123, 255, 0);
     }
-
-    35% {
-        transform: scale(0.9, 1.2) rotate(-15deg);
-        letter-spacing: -0.3em;
-        filter: blur(2px);
-        opacity: 0.9;
-    }
-
-    45% {
-        transform: scale(0.6, 0.6) rotate(90deg);
-        letter-spacing: -0.6em;
-        filter: blur(4px);
-        opacity: 0.85;
-    }
-
-    /* Circle phase - continuous rotation */
     50% {
-        transform: scale(0.4) rotate(180deg);
-        letter-spacing: -0.8em;
-        filter: blur(6px);
-        opacity: 0.8;
+        text-shadow:
+            0 0 10px rgba(0, 123, 255, 0.3),
+            0 0 20px rgba(0, 123, 255, 0.15),
+            0 0 30px rgba(0, 123, 255, 0.1);
     }
+}
 
-    55% {
-        transform: scale(0.3) rotate(270deg);
-        letter-spacing: -1em;
-        filter: blur(8px);
-        opacity: 0.75;
+/* 3. Sound waves effect */
+.ai-alive-title::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    opacity: 0;
+    background: linear-gradient(90deg, transparent, rgba(0, 123, 255, 0.3), transparent);
+    animation: soundWave 8s ease-in-out infinite;
+}
+
+@keyframes soundWave {
+    0%, 70%, 100% {
+        opacity: 0;
+        transform: translateY(-50%) scaleY(1);
     }
-
-    60% {
-        transform: scale(0.4) rotate(360deg);
-        letter-spacing: -0.8em;
-        filter: blur(6px);
-        opacity: 0.8;
-    }
-
-    /* Expanding back - continuous motion */
-    65% {
-        transform: scale(0.6, 0.6) rotate(450deg);
-        letter-spacing: -0.6em;
-        filter: blur(4px);
-        opacity: 0.85;
-    }
-
     75% {
-        transform: scale(0.9, 1.1) rotate(540deg);
-        letter-spacing: -0.3em;
-        filter: blur(2px);
-        opacity: 0.9;
-    }
-
-    85% {
-        transform: scale(1.05, 0.95) rotate(700deg);
-        letter-spacing: -0.1em;
-        filter: blur(0.8px);
-        opacity: 0.95;
-    }
-
-    /* Return to original - complete the rotation */
-    95%, 100% {
-        transform: scale(1) rotate(720deg);
-        letter-spacing: 0;
-        filter: blur(0px);
         opacity: 1;
+        transform: translateY(-50%) scaleY(1);
     }
+    85% {
+        opacity: 0;
+        transform: translateY(-50%) scaleY(3);
+    }
+}
+
+/* 4. Micro glitch effect */
+.ai-alive-title {
+    animation:
+        aiBreathing 4s ease-in-out infinite,
+        subtleGlow 6s ease-in-out infinite,
+        microGlitch 15s infinite;
+}
+
+@keyframes microGlitch {
+    0%, 94%, 96%, 100% {
+        text-shadow:
+            0 0 10px rgba(0, 123, 255, 0.2),
+            0 0 20px rgba(0, 123, 255, 0.1);
+        transform: translate(0);
+    }
+    95% {
+        text-shadow:
+            2px 0 2px rgba(255, 0, 0, 0.3),
+            -2px 0 2px rgba(0, 255, 255, 0.3),
+            0 0 10px rgba(0, 123, 255, 0.2);
+        transform: translate(1px, 0);
+    }
+}
+
+/* 5. Floating 24/7 numbers */
+.ai-alive-title::after {
+    content: '24/7';
+    position: absolute;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(0, 123, 255, 0.6);
+    animation: float247 12s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes float247 {
+    0%, 60%, 100% {
+        opacity: 0;
+        transform: translate(-50%, 0);
+    }
+    70% {
+        opacity: 1;
+        transform: translate(-50%, -30px);
+    }
+    90% {
+        opacity: 0;
+        transform: translate(-50%, -50px);
+    }
+}
+
+/* 6. Cursor blink */
+.cursor-blink {
+    display: inline-block;
+    width: 3px;
+    height: 1.2em;
+    background: rgba(0, 123, 255, 0.8);
+    margin-left: 2px;
+    animation: cursorBlink 1s infinite;
+    vertical-align: text-bottom;
+}
+
+@keyframes cursorBlink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+
+/* Combined subtle data streams effect */
+@keyframes dataStream {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+.ai-alive-title {
+    background-image: linear-gradient(
+        90deg,
+        transparent 0%,
+        transparent 40%,
+        rgba(0, 123, 255, 0.05) 50%,
+        transparent 60%,
+        transparent 100%
+    );
+    background-size: 200% 100%;
+    animation:
+        aiBreathing 4s ease-in-out infinite,
+        subtleGlow 6s ease-in-out infinite,
+        microGlitch 15s infinite,
+        dataStream 10s linear infinite;
 }
 
 /* Modal */
