@@ -317,60 +317,31 @@ body {
 /* Sport Figures Base */
 .sport-figure {
     position: absolute;
-    width: 80px;
-    height: 80px;
+    font-size: 48px;
+    color: var(--apple-blue);
     top: 50%;
     transform: translateY(-50%);
+    opacity: 0.4;
 }
 
 /* Runner Figure */
 .sport-figure.runner {
     left: -100px;
-    animation: moveAcrossScreen 15s infinite linear;
-}
-
-.sport-figure.runner::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cg stroke='%23000000' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3C!-- Head --%3E%3Ccircle cx='50' cy='25' r='10'/%3E%3C!-- Body --%3E%3Cpath d='M50 35 L50 55'/%3E%3C!-- Back leg --%3E%3Cpath d='M50 55 L35 75 L30 95'/%3E%3C!-- Front leg --%3E%3Cpath d='M50 55 L60 75 L65 95'/%3E%3C!-- Back arm --%3E%3Cpath d='M50 40 L35 50 L25 60'/%3E%3C!-- Front arm --%3E%3Cpath d='M50 40 L65 45 L75 40'/%3E%3C/g%3E%3C/svg%3E") no-repeat center;
-    background-size: contain;
-    animation: runningMotion 0.6s infinite;
+    animation: moveAcrossScreen 15s infinite linear, runningMotion 0.6s infinite;
 }
 
 /* Cyclist Figure */
 .sport-figure.cyclist {
     left: -100px;
-    animation: moveAcrossScreen 15s infinite linear;
+    animation: moveAcrossScreen 15s infinite linear, cyclingMotion 0.8s infinite;
     animation-delay: 5s;
-}
-
-.sport-figure.cyclist::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 150 120'%3E%3Cg stroke='%23000000' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3C!-- Head --%3E%3Ccircle cx='60' cy='30' r='10'/%3E%3C!-- Body leaning forward --%3E%3Cpath d='M60 40 L65 55 L60 65'/%3E%3C!-- Legs pedaling --%3E%3Cpath d='M60 65 L50 80 L45 95'/%3E%3Cpath d='M60 65 L70 80 L75 95'/%3E%3C!-- Arms on handlebars --%3E%3Cpath d='M60 45 L75 50 L85 48'/%3E%3C!-- Bike frame --%3E%3Cpath d='M85 48 L75 75 L45 75 L60 48 L85 48'/%3E%3C!-- Wheels --%3E%3Ccircle cx='45' cy='95' r='15'/%3E%3Ccircle cx='85' cy='95' r='15'/%3E%3C!-- Spokes --%3E%3Cpath d='M45 80 L45 110 M30 95 L60 95'/%3E%3Cpath d='M85 80 L85 110 M70 95 L100 95'/%3E%3C/g%3E%3C/svg%3E") no-repeat center;
-    background-size: contain;
-    animation: cyclingMotion 0.8s infinite;
 }
 
 /* Swimmer Figure */
 .sport-figure.swimmer {
     left: -100px;
-    animation: moveAcrossScreen 15s infinite linear;
+    animation: moveAcrossScreen 15s infinite linear, swimmingMotion 1s infinite;
     animation-delay: 10s;
-}
-
-.sport-figure.swimmer::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 120'%3E%3Cg stroke='%23000000' stroke-width='2.5' fill='none' stroke-linecap='round' stroke-linejoin='round'%3E%3C!-- Head --%3E%3Ccircle cx='30' cy='60' r='10'/%3E%3C!-- Body horizontal --%3E%3Cpath d='M40 60 L70 60'/%3E%3C!-- Arms stroke --%3E%3Cpath d='M40 60 L55 45 L70 40'/%3E%3Cpath d='M40 60 L55 75 L70 80'/%3E%3C!-- Legs kicking --%3E%3Cpath d='M70 60 L90 55 L105 50'/%3E%3Cpath d='M70 60 L90 65 L105 70'/%3E%3C!-- Water waves --%3E%3Cpath d='M10 75 Q20 72 30 75 T50 75 T70 75 T90 75 T110 75 T130 75' opacity='0.3'/%3E%3Cpath d='M5 80 Q15 77 25 80 T45 80 T65 80 T85 80 T105 80 T125 80' opacity='0.2'/%3E%3C/g%3E%3C/svg%3E") no-repeat center;
-    background-size: contain;
-    animation: swimmingMotion 1s infinite;
 }
 
 /* Movement Animations */
@@ -917,13 +888,13 @@ body {
 
     /* Cardio animation adjustments for mobile */
     .cardio-animation-container {
-        height: 70px;
-        opacity: 0.1;
+        height: 60px;
+        opacity: 0.12;
     }
 
     .sport-figure {
-        width: 50px;
-        height: 50px;
+        font-size: 32px;
+        opacity: 0.3;
     }
 
     /* Typewriter adjustments for mobile */
