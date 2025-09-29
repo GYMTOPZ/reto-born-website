@@ -463,6 +463,55 @@ body {
     z-index: 5;
 }
 
+/* Rainbow Text Animation for Comunidad */
+.rainbow-text span {
+    display: inline-block;
+    color: var(--apple-blue);
+    transition: color 0.6s ease;
+}
+
+/* Define unique colors for each letter */
+.rainbow-text .letter-1 { animation: colorChange1 0.6s 0.1s forwards; }
+.rainbow-text .letter-2 { animation: colorChange2 0.6s 0.2s forwards; }
+.rainbow-text .letter-3 { animation: colorChange3 0.6s 0.3s forwards; }
+.rainbow-text .letter-4 { animation: colorChange4 0.6s 0.4s forwards; }
+.rainbow-text .letter-5 { animation: colorChange5 0.6s 0.5s forwards; }
+.rainbow-text .letter-6 { animation: colorChange6 0.6s 0.6s forwards; }
+.rainbow-text .letter-7 { animation: colorChange7 0.6s 0.7s forwards; }
+.rainbow-text .letter-8 { animation: colorChange8 0.6s 0.8s forwards; }
+.rainbow-text .letter-9 { animation: colorChange9 0.6s 0.9s forwards; }
+.rainbow-text .letter-10 { animation: colorChange10 0.6s 1.0s forwards; }
+.rainbow-text .letter-11 { animation: colorChange11 0.6s 1.1s forwards; }
+.rainbow-text .letter-12 { animation: colorChange12 0.6s 1.2s forwards; }
+.rainbow-text .letter-13 { animation: colorChange13 0.6s 1.3s forwards; }
+.rainbow-text .letter-14 { animation: colorChange14 0.6s 1.4s forwards; }
+.rainbow-text .letter-15 { animation: colorChange15 0.6s 1.5s forwards; }
+.rainbow-text .letter-16 { animation: colorChange16 0.6s 1.6s forwards; }
+.rainbow-text .letter-17 { animation: colorChange17 0.6s 1.7s forwards; }
+.rainbow-text .letter-18 { animation: colorChange18 0.6s 1.8s forwards; }
+.rainbow-text .letter-19 { animation: colorChange19 0.6s 1.9s forwards; }
+
+/* Color animations - each letter gets a unique, contrasting color */
+@keyframes colorChange1 { to { color: #FF006E; } } /* Hot Pink */
+@keyframes colorChange2 { to { color: #8B00FF; } } /* Violet */
+@keyframes colorChange3 { to { color: #00D9FF; } } /* Cyan */
+@keyframes colorChange4 { to { color: #FF8500; } } /* Orange */
+@keyframes colorChange5 { to { color: #00FF00; } } /* Lime */
+@keyframes colorChange6 { to { color: #FF0000; } } /* Red */
+@keyframes colorChange7 { to { color: #00A8FF; } } /* Sky Blue */
+@keyframes colorChange8 { to { color: #FFD700; } } /* Gold */
+@keyframes colorChange9 { to { color: #9D00FF; } } /* Purple */
+@keyframes colorChange10 { to { color: #FF1493; } } /* Deep Pink */
+@keyframes colorChange11 { to { color: #00CED1; } } /* Dark Turquoise */
+@keyframes colorChange12 { to { color: #FF4500; } } /* Orange Red */
+@keyframes colorChange13 { to { color: #32CD32; } } /* Lime Green */
+@keyframes colorChange14 { to { color: #FF69B4; } } /* Hot Pink Light */
+@keyframes colorChange15 { to { color: #4169E1; } } /* Royal Blue */
+@keyframes colorChange16 { to { color: #FFB600; } } /* Amber */
+@keyframes colorChange17 { to { color: #DC143C; } } /* Crimson */
+@keyframes colorChange18 { to { color: #00FA9A; } } /* Medium Spring Green */
+@keyframes colorChange19 { to { color: #FF00FF; } } /* Magenta */
+
 /* Coming Soon Badge */
 .coming-soon-badge {
     display: inline-block;
