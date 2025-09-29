@@ -303,27 +303,28 @@ function initFallingAnimation() {
         const width = rect.width;
         const height = rect.height;
 
-        // Check if mobile
+        // Check if mobile - MUCH more aggressive optimization
         const isMobile = window.innerWidth <= 768;
-        const particleDensity = isMobile ? 0.7 : 1;
+        const particleReduction = isMobile ? 3 : 1; // Reduce particles by 3x on mobile
 
         // Create particles around the perimeter of the letters
         // This simulates the letter shape "exploding" outward
 
         // Top edge particles
-        for (let i = 0; i < width; i += 8) { // Less frequent
+        const topStep = isMobile ? 16 : 8; // Much less frequent on mobile
+        for (let i = 0; i < width; i += topStep) {
             const x = rect.left + i;
             const y = rect.top;
             const dirX = (x - centerX) / width;
             const dirY = -1; // Upward from top
 
             // Smoke expanding from top edge
-            if (Math.random() > 0.6) { // Less smoke
+            if (Math.random() > (isMobile ? 0.8 : 0.6)) { // Much less smoke on mobile
                 particles.push(new Smoke(x, y, dirX, dirY));
             }
 
-            // Debris from edges
-            if (Math.random() > 0.5) {
+            // Debris from edges - skip most on mobile
+            if (!isMobile && Math.random() > 0.5) {
                 const debris = new Debris(x, y, Math.random() > 0.7 ? 'small' : 'tiny');
                 debris.vx = dirX * (Math.random() * 8 + 4);
                 debris.vy = dirY * (Math.random() * 6 + 3);
@@ -331,72 +332,77 @@ function initFallingAnimation() {
             }
         }
 
-        // Bottom edge particles - MOST INTENSE
-        for (let i = 0; i < width; i += 6) { // Reduced frequency
+        // Bottom edge particles - MOST INTENSE but optimized for mobile
+        const bottomStep = isMobile ? 12 : 6; // Much less frequent on mobile
+        for (let i = 0; i < width; i += bottomStep) {
             const x = rect.left + i;
             const y = rect.bottom;
             const dirX = (x - centerX) / width;
             const dirY = 1; // Downward from bottom
 
             // Dense smoke from bottom impact
-            if (Math.random() > 0.2) { // Some randomness
+            if (Math.random() > (isMobile ? 0.5 : 0.2)) { // Less smoke on mobile
                 particles.push(new Smoke(x, y, dirX, dirY));
             }
 
-            // More debris from bottom (main impact)
-            if (Math.random() > 0.2) {
-                const size = Math.random() > 0.6 ? 'medium' : Math.random() > 0.3 ? 'small' : 'tiny';
+            // More debris from bottom (main impact) - reduce on mobile
+            if (Math.random() > (isMobile ? 0.6 : 0.2)) {
+                const size = isMobile ? 'tiny' : (Math.random() > 0.6 ? 'medium' : Math.random() > 0.3 ? 'small' : 'tiny');
                 const debris = new Debris(x, y, size);
-                debris.vx = dirX * (Math.random() * 10 + 5);
-                debris.vy = Math.abs(dirY) * (Math.random() * 8 + 4);
+                debris.vx = dirX * (Math.random() * (isMobile ? 6 : 10) + 5);
+                debris.vy = Math.abs(dirY) * (Math.random() * (isMobile ? 5 : 8) + 4);
                 particles.push(debris);
             }
 
-            // Extra dust from bottom
-            if (Math.random() > 0.4) {
+            // Extra dust from bottom - skip most on mobile
+            if (!isMobile && Math.random() > 0.4) {
                 particles.push(new Dust(x + (Math.random() - 0.5) * 5, y));
             }
         }
 
-        // Left edge particles
-        for (let i = 0; i < height; i += 8) { // Less frequent
-            const x = rect.left;
-            const y = rect.top + i;
-            const dirX = -1; // Leftward from left edge
-            const dirY = (y - centerY) / height;
+        // Left edge particles - skip on mobile for performance
+        if (!isMobile) {
+            for (let i = 0; i < height; i += 12) { // Less frequent
+                const x = rect.left;
+                const y = rect.top + i;
+                const dirX = -1; // Leftward from left edge
+                const dirY = (y - centerY) / height;
 
-            // Smoke from left edge
-            if (Math.random() > 0.7) { // Much less smoke
-                particles.push(new Smoke(x, y, dirX, dirY));
-            }
+                // Smoke from left edge
+                if (Math.random() > 0.8) { // Much less smoke
+                    particles.push(new Smoke(x, y, dirX, dirY));
+                }
 
-            // Debris from left edge
-            if (Math.random() > 0.6) {
-                const debris = new Debris(x, y, 'tiny');
-                debris.vx = dirX * (Math.random() * 8 + 4);
-                debris.vy = dirY * (Math.random() * 6 + 2);
-                particles.push(debris);
+                // Debris from left edge
+                if (Math.random() > 0.7) {
+                    const debris = new Debris(x, y, 'tiny');
+                    debris.vx = dirX * (Math.random() * 6 + 3);
+                    debris.vy = dirY * (Math.random() * 4 + 2);
+                    particles.push(debris);
+                }
             }
         }
 
-        // Right edge particles
-        for (let i = 0; i < height; i += 8) { // Less frequent
-            const x = rect.right;
-            const y = rect.top + i;
-            const dirX = 1; // Rightward from right edge
-            const dirY = (y - centerY) / height;
+        // Right edge particles - skip on mobile for performance
+        if (!isMobile) {
+            for (let i = 0; i < height; i += 12) { // Less frequent
+                const x = rect.right;
+                const y = rect.top + i;
+                const dirX = 1; // Rightward from right edge
+                const dirY = (y - centerY) / height;
 
-            // Smoke from right edge
-            if (Math.random() > 0.7) { // Much less smoke
-                particles.push(new Smoke(x, y, dirX, dirY));
-            }
+                // Smoke from right edge
+                if (Math.random() > 0.8) { // Much less smoke
+                    particles.push(new Smoke(x, y, dirX, dirY));
+                }
 
-            // Debris from right edge
-            if (Math.random() > 0.6) {
-                const debris = new Debris(x, y, 'tiny');
-                debris.vx = dirX * (Math.random() * 8 + 4);
-                debris.vy = dirY * (Math.random() * 6 + 2);
-                particles.push(debris);
+                // Debris from right edge
+                if (Math.random() > 0.7) {
+                    const debris = new Debris(x, y, 'tiny');
+                    debris.vx = dirX * (Math.random() * 6 + 3);
+                    debris.vy = dirY * (Math.random() * 4 + 2);
+                    particles.push(debris);
+                }
             }
         }
 
@@ -409,8 +415,9 @@ function initFallingAnimation() {
         ];
 
         corners.forEach(corner => {
-            // Extra smoke at corners
-            for (let i = 0; i < 2; i++) { // Much less smoke at corners
+            // Extra smoke at corners - minimal on mobile
+            const smokeCount = isMobile ? 1 : 2;
+            for (let i = 0; i < smokeCount; i++) {
                 particles.push(new Smoke(
                     corner.x + (Math.random() - 0.5) * 5,
                     corner.y + (Math.random() - 0.5) * 5,
@@ -419,19 +426,21 @@ function initFallingAnimation() {
                 ));
             }
 
-            // Extra debris at corners
-            for (let i = 0; i < 8; i++) {
-                const size = ['small', 'tiny', 'medium'][Math.floor(Math.random() * 3)];
+            // Extra debris at corners - reduced on mobile
+            const debrisCount = isMobile ? 2 : 8;
+            for (let i = 0; i < debrisCount; i++) {
+                const size = isMobile ? 'tiny' : ['small', 'tiny', 'medium'][Math.floor(Math.random() * 3)];
                 const debris = new Debris(corner.x, corner.y, size);
-                debris.vx = corner.dirX * (Math.random() * 12 + 6);
-                debris.vy = corner.dirY * (Math.random() * 10 + 5);
+                debris.vx = corner.dirX * (Math.random() * (isMobile ? 8 : 12) + 6);
+                debris.vy = corner.dirY * (Math.random() * (isMobile ? 6 : 10) + 5);
                 particles.push(debris);
             }
         });
 
-        // Create a "shockwave" of dust that follows the letter outline
-        const outlinePoints = Math.floor((width * 2 + height * 2) / 5);
-        for (let i = 0; i < outlinePoints; i++) {
+        // Create a "shockwave" of dust that follows the letter outline - skip on mobile
+        if (!isMobile) {
+            const outlinePoints = Math.floor((width * 2 + height * 2) / 8);
+            for (let i = 0; i < outlinePoints; i++) {
             const progress = i / outlinePoints;
             const perimeter = (width + height) * 2;
             const distance = progress * perimeter;
@@ -464,11 +473,12 @@ function initFallingAnimation() {
                 dirY = (y - centerY) / height;
             }
 
-            // Dust particles following outline
-            const dust = new Dust(x, y);
-            dust.vx = dirX * (Math.random() * 15 + 10);
-            dust.vy = dirY * (Math.random() * 15 + 10);
-            particles.push(dust);
+                // Dust particles following outline
+                const dust = new Dust(x, y);
+                dust.vx = dirX * (Math.random() * 12 + 8);
+                dust.vy = dirY * (Math.random() * 12 + 8);
+                particles.push(dust);
+            }
         }
     }
 
