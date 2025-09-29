@@ -84,7 +84,7 @@ body {
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: shimmerEffect 2s ease-in-out;
+    animation: shimmerEffect 1.5s ease-in-out forwards;
 }
 
 @keyframes shimmerEffect {
@@ -92,7 +92,7 @@ body {
         background-position: 200% center;
     }
     100% {
-        background-position: -200% center;
+        background-position: -100% center;
     }
 }
 

@@ -582,7 +582,7 @@ function initFallingAnimation() {
                             // Remove shimmer class after animation completes
                             setTimeout(() => {
                                 element.classList.remove('shimmer');
-                            }, 2000);
+                            }, 1500);
                         }, 300);
                     }, 150);
                 }, 800);
