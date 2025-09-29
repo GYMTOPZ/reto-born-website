@@ -28,7 +28,11 @@ Website para Reto Born con animaciones únicas para cada sección.
   4. "Emilio ya se me están marcando los abs!" (con comillas)
 - Cursor: barra delgada de 2px que parpadea
 - Texto centrado con wrap correcto para múltiples líneas
-- Responsive para móvil
+- Responsive para móvil con:
+  - Altura fija de 120px para evitar que subtítulo se mueva
+  - Contenedor wrapper para mantener cursor dentro del texto
+  - Font-size: 36px en móvil
+  - Overflow hidden para contener el cursor
 
 ### 4. Botón CTA del Hero
 - Aparece sutilmente cuando el usuario hace scroll back al hero

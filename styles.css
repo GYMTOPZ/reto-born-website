@@ -181,6 +181,66 @@ body {
     color: var(--gray);
 }
 
+/* Rotating O to Apple animation */
+.rotating-o {
+    display: inline-block;
+    position: relative;
+    animation: rotateToApple 3s infinite;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    width: 0.8em;
+    height: 1em;
+    vertical-align: baseline;
+    margin: 0 -0.05em;
+}
+
+@keyframes rotateToApple {
+    0% {
+        /* Show letter o for 1 second */
+        transform: rotateY(0deg);
+    }
+    33.33% {
+        /* Stay as o */
+        transform: rotateY(0deg);
+    }
+    50% {
+        /* Rotate to apple */
+        transform: rotateY(180deg);
+    }
+    83.33% {
+        /* Stay as apple for 1 second */
+        transform: rotateY(180deg);
+    }
+    100% {
+        /* Rotate back to o */
+        transform: rotateY(360deg);
+    }
+}
+
+/* Create apple on the back side */
+.rotating-o::after {
+    content: "🍎";
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    transform: translate(-50%, -50%) rotateY(180deg) scaleX(-1);
+    backface-visibility: hidden;
+    font-size: 0.9em;
+}
+
+/* Show the "ó" on front side */
+.rotating-o::before {
+    content: "ó";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    backface-visibility: hidden;
+    color: var(--apple-blue);
+    font-size: 1em;
+    font-weight: inherit;
+}
+
 /* Coming Soon Badge */
 .coming-soon-badge {
     display: inline-block;
