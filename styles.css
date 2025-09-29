@@ -498,7 +498,7 @@ body {
 /* Before/After Carousel - Full width */
 .before-after-carousel {
     position: absolute;
-    top: 65%;
+    top: 72%;
     left: 0;
     width: 100%;
     transform: translateY(-50%);
@@ -1120,7 +1120,7 @@ body {
     /* Before/After Carousel Mobile Adjustments */
     .before-after-carousel {
         height: 70px;
-        top: 68%;
+        top: 75%;
     }
 
     .transformation-card {
