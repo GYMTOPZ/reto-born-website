@@ -461,11 +461,11 @@ body {
 .typewriter-cursor {
     display: inline-block;
     width: 3px;
-    height: 1.2em;
+    height: 1.4em;
     background-color: var(--apple-blue);
     animation: cursorBlink 1s infinite;
-    margin-left: 3px;
-    vertical-align: middle;
+    margin-left: 4px;
+    vertical-align: text-bottom;
     flex-shrink: 0;
 }
 
@@ -672,7 +672,7 @@ body {
     }
 
     .typewriter-cursor {
-        width: 2px;
-        height: 1em;
+        width: 3px;
+        height: 1.3em;
     }
 }
