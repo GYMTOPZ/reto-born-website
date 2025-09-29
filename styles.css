@@ -438,117 +438,93 @@ body {
 
 /* Morphing title animation for "Emilio siempre contigo" */
 .morphing-title {
-    position: relative;
-    display: inline-flex;
-    gap: 0.5em;
-    align-items: center;
-    justify-content: center;
-}
-
-.morph-word {
-    display: inline-block;
-    animation: morphToCircle 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    animation: fluidMorph 8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
     transform-origin: center center;
-    position: relative;
+    display: inline-block;
 }
 
-.morph-word:nth-child(1) {
-    animation-delay: 0s;
-}
-
-.morph-word:nth-child(2) {
-    animation-delay: 0.05s;
-}
-
-.morph-word:nth-child(3) {
-    animation-delay: 0.1s;
-}
-
-@keyframes morphToCircle {
-    /* Words visible */
-    0%, 10% {
-        transform: translateX(0) translateY(0) scale(1) skew(0);
+@keyframes fluidMorph {
+    /* Brief pause to read the words */
+    0%, 15% {
+        transform: scale(1) rotate(0deg);
         letter-spacing: 0;
-        opacity: 1;
         filter: blur(0px);
-    }
-
-    /* Start melting - letters stretch */
-    20% {
-        transform: translateX(calc(var(--move-x) * 0.3)) translateY(0) scale(1.1, 0.9) skew(5deg);
-        letter-spacing: -0.05em;
         opacity: 1;
-        filter: blur(0.5px);
     }
 
-    /* Moving to center - becoming liquid */
-    30% {
-        transform: translateX(calc(var(--move-x) * 0.6)) translateY(0) scale(0.8, 1.2) skew(-10deg);
-        letter-spacing: -0.2em;
+    /* Start morphing - continuous fluid motion */
+    25% {
+        transform: scale(1.1, 0.9) rotate(10deg);
+        letter-spacing: -0.1em;
+        filter: blur(0.8px);
         opacity: 0.95;
-        filter: blur(1px);
     }
 
-    /* Merging into blob */
-    40% {
-        transform: translateX(var(--move-x)) translateY(0) scale(0.4, 0.4) skew(0) rotate(180deg);
+    35% {
+        transform: scale(0.9, 1.2) rotate(-15deg);
+        letter-spacing: -0.3em;
+        filter: blur(2px);
+        opacity: 0.9;
+    }
+
+    45% {
+        transform: scale(0.6, 0.6) rotate(90deg);
+        letter-spacing: -0.6em;
+        filter: blur(4px);
+        opacity: 0.85;
+    }
+
+    /* Circle phase - continuous rotation */
+    50% {
+        transform: scale(0.4) rotate(180deg);
         letter-spacing: -0.8em;
+        filter: blur(6px);
         opacity: 0.8;
-        filter: blur(3px);
     }
 
-    /* Perfect circle rotating */
-    45%, 55% {
-        transform: translateX(0) translateY(0) scale(0.3) rotate(720deg);
+    55% {
+        transform: scale(0.3) rotate(270deg);
         letter-spacing: -1em;
-        opacity: 0.7;
-        filter: blur(5px);
+        filter: blur(8px);
+        opacity: 0.75;
     }
 
-    /* Start separating */
     60% {
-        transform: translateX(calc(var(--move-x) * -0.5)) translateY(0) scale(0.4) rotate(900deg);
+        transform: scale(0.4) rotate(360deg);
         letter-spacing: -0.8em;
+        filter: blur(6px);
         opacity: 0.8;
-        filter: blur(3px);
     }
 
-    /* Stretching back */
-    70% {
-        transform: translateX(calc(var(--move-x) * -0.3)) translateY(0) scale(0.9, 1.1) skew(10deg);
-        letter-spacing: -0.2em;
+    /* Expanding back - continuous motion */
+    65% {
+        transform: scale(0.6, 0.6) rotate(450deg);
+        letter-spacing: -0.6em;
+        filter: blur(4px);
+        opacity: 0.85;
+    }
+
+    75% {
+        transform: scale(0.9, 1.1) rotate(540deg);
+        letter-spacing: -0.3em;
+        filter: blur(2px);
+        opacity: 0.9;
+    }
+
+    85% {
+        transform: scale(1.05, 0.95) rotate(700deg);
+        letter-spacing: -0.1em;
+        filter: blur(0.8px);
         opacity: 0.95;
-        filter: blur(1px);
     }
 
-    /* Almost reformed */
-    80% {
-        transform: translateX(calc(var(--move-x) * -0.1)) translateY(0) scale(1.05, 0.95) skew(-5deg);
-        letter-spacing: -0.05em;
-        opacity: 1;
-        filter: blur(0.5px);
-    }
-
-    /* Back to original */
-    90%, 100% {
-        transform: translateX(0) translateY(0) scale(1) skew(0);
+    /* Return to original - complete the rotation */
+    95%, 100% {
+        transform: scale(1) rotate(720deg);
         letter-spacing: 0;
-        opacity: 1;
         filter: blur(0px);
+        opacity: 1;
     }
-}
-
-/* Movement values for each word */
-.morph-word:nth-child(1) {
-    --move-x: 120px;
-}
-
-.morph-word:nth-child(2) {
-    --move-x: 0px;
-}
-
-.morph-word:nth-child(3) {
-    --move-x: -120px;
 }
 
 /* Modal */
