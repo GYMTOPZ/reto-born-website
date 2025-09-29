@@ -62,8 +62,22 @@ Website para Reto Born con animaciones únicas para cada sección.
   - Solo cambia color y forma, no posición
 - Ciclo: 1s letra → 0.6s transformación → 1.4s manzana → 0.6s transformación → 0.4s letra
 
+### 7. Sección "Cardio a tu medida" - Figuras deportivas animadas
+- 6 iconos Font Awesome animados: runner, cyclist, swimmer, walker, elliptical, hiker
+- Animación horizontal de izquierda a derecha (100vw)
+- Cada figura con 2 segundos de delay entre ellas
+- Posicionadas entre título y subtítulo con espacio dedicado
+- Detalles:
+  - Contenedor de 80px altura (60px móvil)
+  - Márgenes de 30px arriba/abajo (20px móvil)
+  - Iconos azul Apple con opacity 0.6 (0.5 móvil)
+  - Ciclo de 12 segundos por figura
+  - Animaciones secundarias únicas para cada actividad
+  - Position relative para ocupar espacio real sin overlap
+
 ## Notas Técnicas
 - Todas las animaciones usan CSS @keyframes para mejor performance
 - JavaScript mínimo, principalmente para typewriter e IntersectionObserver
 - Canvas para efectos de partículas
 - Mobile-first responsive design
+- Font Awesome 6.4.0 para iconos deportivos
