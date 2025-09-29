@@ -95,8 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Hero CTA button animation on scroll back
     let hasScrolledPastHero = false;
+    let shimmerTimeout = null;
     const heroCTA = document.getElementById('heroCTA');
     const heroSection = document.querySelector('.hero');
+    const retoWord = document.getElementById('reto');
+    const bornWord = document.getElementById('born');
 
     // Create observer for hero section
     const heroObserver = new IntersectionObserver((entries) => {
@@ -106,6 +109,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (heroCTA) {
                     heroCTA.classList.add('visible');
                     heroCTA.classList.remove('hidden');
+                }
+
+                // Add shimmer effect when scrolling back
+                if (retoWord && bornWord) {
+                    // Clear any existing timeout
+                    if (shimmerTimeout) {
+                        clearTimeout(shimmerTimeout);
+                    }
+
+                    // Add shimmer class
+                    retoWord.classList.add('shimmer');
+                    bornWord.classList.add('shimmer');
+
+                    // Remove shimmer after animation
+                    shimmerTimeout = setTimeout(() => {
+                        retoWord.classList.remove('shimmer');
+                        bornWord.classList.remove('shimmer');
+                    }, 1500);
                 }
             }
         });
