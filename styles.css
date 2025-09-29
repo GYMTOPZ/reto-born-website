@@ -470,54 +470,58 @@ body {
 }
 
 .community-section .feature-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    position: relative;
     height: 100%;
-    gap: 30px;
+}
+
+.community-section .feature-title {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 2;
 }
 
 .community-section .feature-text {
-    position: relative;
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1;
-    margin-top: 30px;
+    text-align: center;
 }
 
 /* Before/After Carousel - Full width */
 .before-after-carousel {
-    position: relative;
-    left: -50vw;
-    right: -50vw;
-    margin-left: 50vw;
-    margin-right: 50vw;
+    position: absolute;
+    top: 50%;
+    left: 0;
     width: 100vw;
+    transform: translateY(-50%);
     opacity: 1;
     overflow: hidden;
     height: 220px;
     display: flex;
     align-items: center;
     z-index: 10;
-    margin-top: 40px;
-    margin-bottom: 20px;
 }
 
 .carousel-track {
     display: flex;
     gap: 20px;
     position: absolute;
-    left: 100%;
-    animation: scrollInfinite 60s linear infinite;
+    animation: scrollCarousel 50s linear infinite;
     padding: 0 20px;
     will-change: transform;
 }
 
-@keyframes scrollInfinite {
-    0% {
-        transform: translateX(0);
+@keyframes scrollCarousel {
+    from {
+        transform: translateX(100vw);
     }
-    100% {
-        transform: translateX(calc(-200% - 100vw));
+    to {
+        transform: translateX(calc(-100% - 20px));
     }
 }
 
@@ -1126,7 +1130,7 @@ body {
     .carousel-track {
         gap: 15px;
         padding: 0 15px;
-        animation: scrollInfinite 50s linear infinite;
+        animation: scrollCarousel 40s linear infinite;
     }
 
     .card-container {
