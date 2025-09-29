@@ -282,137 +282,116 @@ body {
 /* Evolving title animation */
 .evolving-title {
     background: linear-gradient(
-        45deg,
-        #FF6B6B,
-        #4ECDC4,
-        #45B7D1,
-        #96CEB4,
-        #FFEAA7,
-        #DDA5E9,
-        #6C5CE7,
-        #74B9FF
+        135deg,
+        #667eea 0%,
+        #764ba2 8%,
+        #f093fb 16%,
+        #c471f5 24%,
+        #fa71cd 32%,
+        #ff6b6b 40%,
+        #feca57 48%,
+        #48dbfb 56%,
+        #0abde3 64%,
+        #00d2d3 72%,
+        #a29bfe 80%,
+        #6c5ce7 88%,
+        #667eea 100%
     );
-    background-size: 300% 300%;
+    background-size: 600% 600%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: evolveGradient 8s ease infinite, morphPattern 10s ease-in-out infinite;
+    animation: smoothEvolve 60s linear infinite;
     position: relative;
 }
 
-@keyframes evolveGradient {
+@keyframes smoothEvolve {
     0% {
         background-position: 0% 50%;
-        filter: hue-rotate(0deg) brightness(1);
+        filter: hue-rotate(0deg) saturate(1) brightness(1);
+    }
+    6.25% {
+        background-position: 10% 55%;
+        filter: hue-rotate(15deg) saturate(1.1) brightness(1.02);
+    }
+    12.5% {
+        background-position: 20% 60%;
+        filter: hue-rotate(30deg) saturate(1.05) brightness(0.98);
+    }
+    18.75% {
+        background-position: 35% 65%;
+        filter: hue-rotate(45deg) saturate(0.95) brightness(1.03);
     }
     25% {
-        background-position: 50% 25%;
-        filter: hue-rotate(45deg) brightness(1.1);
+        background-position: 50% 70%;
+        filter: hue-rotate(60deg) saturate(1.08) brightness(0.97);
+    }
+    31.25% {
+        background-position: 60% 60%;
+        filter: hue-rotate(75deg) saturate(1.02) brightness(1.01);
+    }
+    37.5% {
+        background-position: 70% 50%;
+        filter: hue-rotate(90deg) saturate(1.12) brightness(0.99);
+    }
+    43.75% {
+        background-position: 80% 40%;
+        filter: hue-rotate(105deg) saturate(0.98) brightness(1.02);
     }
     50% {
-        background-position: 100% 50%;
-        filter: hue-rotate(90deg) brightness(0.95);
+        background-position: 85% 30%;
+        filter: hue-rotate(120deg) saturate(1.06) brightness(0.96);
+    }
+    56.25% {
+        background-position: 90% 35%;
+        filter: hue-rotate(135deg) saturate(1.03) brightness(1.04);
+    }
+    62.5% {
+        background-position: 85% 45%;
+        filter: hue-rotate(150deg) saturate(0.97) brightness(0.98);
+    }
+    68.75% {
+        background-position: 75% 55%;
+        filter: hue-rotate(165deg) saturate(1.09) brightness(1.01);
     }
     75% {
-        background-position: 50% 75%;
-        filter: hue-rotate(180deg) brightness(1.05);
+        background-position: 60% 60%;
+        filter: hue-rotate(180deg) saturate(1.01) brightness(0.99);
+    }
+    81.25% {
+        background-position: 40% 55%;
+        filter: hue-rotate(195deg) saturate(1.07) brightness(1.03);
+    }
+    87.5% {
+        background-position: 20% 50%;
+        filter: hue-rotate(210deg) saturate(0.96) brightness(0.97);
+    }
+    93.75% {
+        background-position: 10% 45%;
+        filter: hue-rotate(225deg) saturate(1.04) brightness(1.02);
     }
     100% {
         background-position: 0% 50%;
-        filter: hue-rotate(360deg) brightness(1);
+        filter: hue-rotate(240deg) saturate(1) brightness(1);
     }
 }
 
-@keyframes morphPattern {
+/* Subtle wave effect for additional smoothness */
+@keyframes waveShift {
     0%, 100% {
-        background-image: linear-gradient(
-            45deg,
-            #FF6B6B,
-            #4ECDC4,
-            #45B7D1,
-            #96CEB4,
-            #FFEAA7,
-            #DDA5E9,
-            #6C5CE7,
-            #74B9FF
-        );
+        background-size: 600% 600%;
     }
-    20% {
-        background-image: linear-gradient(
-            120deg,
-            #667eea,
-            #764ba2,
-            #f093fb,
-            #c471f5,
-            #fa71cd,
-            #48c6ef,
-            #6f86d6,
-            #91eae4
-        );
+    33% {
+        background-size: 650% 650%;
     }
-    40% {
-        background-image: linear-gradient(
-            -45deg,
-            #ee5a6f,
-            #f29263,
-            #ffd86f,
-            #6fc6ff,
-            #84fab0,
-            #8fd3f4,
-            #a8e6cf,
-            #ffd3b6
-        );
-    }
-    60% {
-        background-image: linear-gradient(
-            90deg,
-            #a8edea,
-            #fed6e3,
-            #ffecd2,
-            #fcb69f,
-            #ff9a9e,
-            #fad0c4,
-            #fbc2eb,
-            #a18cd1
-        );
-    }
-    80% {
-        background-image: linear-gradient(
-            180deg,
-            #30cfd0,
-            #330867,
-            #f093fb,
-            #f5576c,
-            #4facfe,
-            #00f2fe,
-            #43e97b,
-            #38f9d7
-        );
+    66% {
+        background-size: 550% 550%;
     }
 }
 
-/* Add subtle glow effect */
-.evolving-title::before {
-    content: attr(data-text);
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: -1;
-    background: inherit;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    filter: blur(10px) opacity(0.5);
-    animation: evolveGlow 5s ease-in-out infinite;
-}
-
-@keyframes evolveGlow {
-    0%, 100% {
-        opacity: 0.3;
-    }
-    50% {
-        opacity: 0.6;
-    }
+/* Apply second subtle animation */
+.evolving-title {
+    animation: smoothEvolve 60s linear infinite, waveShift 90s ease-in-out infinite;
 }
 
 /* Modal */
