@@ -181,11 +181,6 @@ body {
     color: var(--gray);
 }
 
-/* Specific adjustment for Cardio section text */
-.feature.alt .feature-text {
-    margin-top: 20px;
-}
-
 /* Apple Transform Animation */
 .apple-transform {
     display: inline-block;
@@ -307,15 +302,16 @@ body {
 
 /* Cardio Animation Container */
 .cardio-animation-container {
-    position: fixed;
+    position: absolute;
     width: 100vw;
-    height: 100px;
-    top: 52%;
-    left: 0;
-    transform: translateY(-50%);
+    height: 60px;
+    left: 50%;
+    transform: translateX(-50%);
     overflow: hidden;
     z-index: 1;
     pointer-events: none;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 /* Sport Figures Base */
@@ -949,8 +945,9 @@ body {
 
     /* Cardio animation adjustments for mobile */
     .cardio-animation-container {
-        height: 60px;
-        top: 52%;
+        height: 50px;
+        margin-top: 5px;
+        margin-bottom: 5px;
     }
 
     .sport-figure {
