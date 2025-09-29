@@ -440,21 +440,21 @@ body {
 .typewriter-title {
     min-height: 1.5em;
     position: relative;
-    display: inline-flex;
-    align-items: baseline;
-    white-space: nowrap;
+    display: block;
+    text-align: center;
 }
 
 .typewriter-text {
     display: inline;
     min-width: 1px;
+    color: var(--apple-blue);
 }
 
 .typewriter-cursor {
     display: inline-block;
     width: 2px;
     height: 1em;
-    background-color: currentColor;
+    background-color: var(--apple-blue);
     animation: cursorBlink 1s infinite;
     margin-left: 2px;
     vertical-align: baseline;
@@ -649,5 +649,15 @@ body {
 
     .coming-soon-badge {
         margin-bottom: 20px;
+    }
+
+    /* Typewriter adjustments for mobile */
+    .typewriter-title {
+        font-size: 42px;
+        padding: 0 20px;
+    }
+
+    .typewriter-text {
+        word-break: break-word;
     }
 }
