@@ -350,10 +350,10 @@ body {
     animation-delay: 6s;
 }
 
-/* Jumper Figure */
-.sport-figure.jumper {
+/* Elliptical Figure */
+.sport-figure.elliptical {
     left: -100px;
-    animation: moveAcrossScreen 12s infinite linear, jumpingMotion 0.5s infinite;
+    animation: moveAcrossScreen 12s infinite linear, ellipticalMotion 0.7s infinite;
     animation-delay: 8s;
 }
 
@@ -420,19 +420,19 @@ body {
     }
 }
 
-/* Jumping Motion */
-@keyframes jumpingMotion {
+/* Elliptical Motion */
+@keyframes ellipticalMotion {
     0%, 100% {
-        transform: translateY(-50%);
+        transform: translateY(-50%) rotate(-5deg);
     }
     25% {
-        transform: translateY(-60%);
+        transform: translateY(-48%) rotate(0deg);
     }
     50% {
-        transform: translateY(-50%);
+        transform: translateY(-50%) rotate(5deg);
     }
     75% {
-        transform: translateY(-55%);
+        transform: translateY(-52%) rotate(0deg);
     }
 }
 
