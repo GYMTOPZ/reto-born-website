@@ -10,8 +10,8 @@ function initTypewriter() {
     const phrases = [
         "Emilio siempre contigo",
         "\"Hola Emilio! necesito ayuda con...\"",
-        "\"La rutina de hoy estuvo brutal 🔥...\"",
-        "\"Emilio ya se me están marcando los abs!...\""
+        "\"La rutina de hoy estuvo brutal 🔥\"",
+        "\"Emilio ya se me están marcando los abs!\""
     ];
 
     let currentPhraseIndex = 0;
