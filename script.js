@@ -11,7 +11,7 @@ function initTypewriter() {
         "Emilio siempre contigo",
         "Hola Emilio! necesito ayuda con...",
         "Emilio, qué me recomiendas si no tengo...",
-        "La rutina de hoy estuvo brutal Emilio!...",
+        "La rutina de hoy estuvo brutal 🔥...",
         "Emilio ya se me están marcando los abs!..."
     ];
 
