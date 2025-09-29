@@ -185,21 +185,21 @@ body {
 .apple-transform {
     display: inline-block;
     position: relative;
-    width: 0.7em;
-    height: 1em;
-    margin: 0 0.05em;
+    width: 0.52em;
+    height: 0.9em;
+    margin: 0 0.02em;
     vertical-align: baseline;
 }
 
 /* The circular shape for both o and apple */
 .o-circle {
     position: absolute;
-    width: 0.65em;
-    height: 0.65em;
-    border: 0.09em solid var(--apple-blue);
+    width: 0.48em;
+    height: 0.48em;
+    border: 0.085em solid var(--apple-blue);
     border-radius: 50%;
     left: 50%;
-    top: 55%;
+    top: 68%;
     transform: translate(-50%, -50%);
     background: transparent;
     animation: morphToApple 4s infinite;
@@ -208,12 +208,12 @@ body {
 /* The accent/leaf */
 .o-accent {
     position: absolute;
-    width: 0.15em;
-    height: 0.2em;
+    width: 0.12em;
+    height: 0.18em;
     background: var(--apple-blue);
     border-radius: 0 100% 0 100%;
-    left: 52%;
-    top: 25%;
+    left: 54%;
+    top: 32%;
     transform-origin: bottom left;
     transform: rotate(15deg);
     animation: accentToLeaf 4s infinite;
@@ -231,7 +231,7 @@ body {
         background: linear-gradient(135deg, #ff6b6b 0%, #ff4757 100%);
         border-color: transparent;
         border-width: 0;
-        transform: translate(-50%, -50%) rotateY(180deg) scale(1.1);
+        transform: translate(-50%, -50%) rotateY(180deg) scale(1.05);
     }
     50%, 75% {
         /* Stay as apple */
@@ -239,7 +239,7 @@ body {
         border-color: transparent;
         border-width: 0;
         border-radius: 50% 50% 55% 55%;
-        transform: translate(-50%, -50%) rotateY(180deg) scale(1.15);
+        transform: translate(-50%, -50%) rotateY(180deg) scale(1.08);
     }
     85%, 90% {
         /* Transition back to o */
@@ -268,19 +268,19 @@ body {
     }
     35%, 40% {
         /* Transform to leaf */
-        width: 0.2em;
-        height: 0.15em;
+        width: 0.15em;
+        height: 0.12em;
         background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%);
         border-radius: 0 100% 0 100%;
-        transform: rotate(25deg) translateY(-0.05em);
+        transform: rotate(25deg) translateY(-0.03em);
     }
     50%, 75% {
         /* Stay as leaf */
-        width: 0.2em;
-        height: 0.15em;
+        width: 0.15em;
+        height: 0.12em;
         background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%);
         border-radius: 0 100% 0 100%;
-        transform: rotate(25deg) translateY(-0.05em);
+        transform: rotate(25deg) translateY(-0.03em);
     }
     85%, 90% {
         /* Transform back to accent */
