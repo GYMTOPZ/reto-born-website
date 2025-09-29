@@ -39,7 +39,7 @@ body {
     background: var(--white);
     position: relative;
     overflow: hidden;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
 }
 
 /* Smoke Canvas */
@@ -214,7 +214,7 @@ body {
     justify-content: center;
     padding: 80px 20px;
     background: var(--white);
-    scroll-snap-align: start;
+    scroll-snap-align: center;
 }
 
 .feature.alt {
@@ -709,7 +709,7 @@ body {
     color: var(--white);
     text-align: center;
     padding: 80px 20px;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
 }
 
 .download-content {
@@ -756,7 +756,7 @@ body {
     background: var(--light-gray);
     color: var(--gray);
     font-size: 14px;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
 }
 
 .footer-links {
