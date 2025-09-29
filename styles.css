@@ -469,45 +469,37 @@ body {
     overflow: hidden;
 }
 
+.community-section .feature-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    gap: 30px;
+}
+
 .community-section .feature-text {
-    animation: breatheIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     position: relative;
     z-index: 1;
-}
-
-/* Slide out left immediately when section is visible */
-.slide-out-left {
-    animation: slideToLeft 2s ease-in-out 0.5s forwards;
-}
-
-@keyframes slideToLeft {
-    0% {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    50% {
-        transform: translateX(-100px);
-        opacity: 0.5;
-    }
-    100% {
-        transform: translateX(-200%);
-        opacity: 0;
-    }
+    margin-top: 30px;
 }
 
 /* Before/After Carousel - Full width */
 .before-after-carousel {
-    position: absolute;
-    top: 72%;
-    left: 0;
-    width: 100%;
-    transform: translateY(-50%);
+    position: relative;
+    left: -50vw;
+    right: -50vw;
+    margin-left: 50vw;
+    margin-right: 50vw;
+    width: 100vw;
     opacity: 1;
     overflow: hidden;
-    height: 100px;
+    height: 120px;
     display: flex;
     align-items: center;
     z-index: 10;
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
 
 .carousel-track {
@@ -1113,8 +1105,17 @@ body {
 
     /* Before/After Carousel Mobile Adjustments */
     .before-after-carousel {
-        height: 70px;
-        top: 75%;
+        height: 80px;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .community-section .feature-content {
+        gap: 15px;
+    }
+
+    .community-section .feature-text {
+        margin-top: 10px;
     }
 
     .transformation-card {

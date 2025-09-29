@@ -153,12 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const carousel = entry.target.querySelector('.before-after-carousel');
-                    const subtitle = entry.target.querySelector('.slide-out-left');
                     if (carousel) {
                         carousel.style.opacity = '1';
-                    }
-                    if (subtitle) {
-                        subtitle.classList.add('animate');
                     }
                 }
             });
