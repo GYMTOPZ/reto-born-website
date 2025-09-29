@@ -308,7 +308,7 @@ function initFallingAnimation() {
         const particleReduction = isMobile ? 3 : 1; // Reduce particles by 3x on mobile
 
         // Mobile vertical offset - move effects up on mobile
-        const mobileYOffset = isMobile ? -120 : 0; // Move up 120px on mobile to align with letters
+        const mobileYOffset = isMobile ? -60 : 0; // Move up 60px on mobile to align with letters
 
         // Create particles around the perimeter of the letters
         // This simulates the letter shape "exploding" outward
