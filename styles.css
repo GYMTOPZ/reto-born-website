@@ -440,20 +440,26 @@ body {
 .typewriter-title {
     min-height: 1.5em;
     position: relative;
-    display: inline-block;
+    display: inline-flex;
+    align-items: baseline;
+    white-space: nowrap;
 }
 
 .typewriter-text {
-    display: inline-block;
+    display: inline;
     min-width: 1px;
 }
 
 .typewriter-cursor {
     display: inline-block;
     width: 2px;
+    height: 1em;
+    background-color: currentColor;
     animation: cursorBlink 1s infinite;
-    font-weight: 300;
     margin-left: 2px;
+    vertical-align: baseline;
+    position: relative;
+    top: 0.1em;
 }
 
 @keyframes cursorBlink {
