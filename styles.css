@@ -450,6 +450,12 @@ body {
     line-height: 1.3;
 }
 
+.typewriter-container {
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+}
+
 .typewriter-text {
     color: var(--apple-blue);
     word-wrap: break-word;
@@ -665,24 +671,30 @@ body {
     .typewriter-title {
         font-size: 36px;
         padding: 0 20px;
-        min-height: 120px;
+        height: 120px; /* Fixed height instead of min-height */
         max-width: 100%;
         margin-bottom: 20px;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
+        overflow: hidden;
+        position: relative;
     }
 
     .typewriter-text {
         word-break: break-word;
         display: inline;
         line-height: 1.3;
+        max-width: calc(100% - 10px);
     }
 
     .typewriter-cursor {
         width: 2px;
         height: 1em;
         vertical-align: middle;
+        position: relative;
+        top: 0;
+        margin-left: 1px;
     }
 }

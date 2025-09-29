@@ -2,7 +2,7 @@
 
 // Typewriter effect for "Emilio siempre contigo"
 function initTypewriter() {
-    const containerElement = document.querySelector('.typewriter-title');
+    const containerElement = document.querySelector('.typewriter-container');
     const typewriterElement = document.querySelector('.typewriter-text');
     const cursorElement = document.querySelector('.typewriter-cursor');
     if (!typewriterElement || !cursorElement) return;
