@@ -471,6 +471,8 @@ body {
 
 .community-section .feature-text {
     animation: breatheIn 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    position: relative;
+    z-index: 1;
 }
 
 /* Fade out with breath effect when carousel comes */
@@ -482,54 +484,56 @@ body {
     to {
         transform: scale(0.9);
         opacity: 0;
+        visibility: hidden;
     }
 }
 
-/* Before/After Carousel - Inline with subtitle */
+/* Before/After Carousel - Below title, above subtitle */
 .before-after-carousel {
     position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: -100%;
+    top: 55%;
+    left: 0;
     right: 0;
-    width: 200%;
+    width: 100vw;
+    transform: translateY(-50%);
     opacity: 0;
-    animation: slideInFromLeft 1s ease-out 3s forwards;
-    overflow: visible;
-    height: 120px;
+    animation: fadeInCarousel 1s ease-out 3s forwards;
+    overflow: hidden;
+    height: 100px;
     display: flex;
     align-items: center;
+    z-index: 10;
 }
 
-@keyframes slideInFromLeft {
+@keyframes fadeInCarousel {
     to {
-        left: 0;
         opacity: 1;
     }
 }
 
 .carousel-track {
     display: flex;
-    gap: 20px;
-    animation: scrollCarousel 15s linear infinite;
-    padding: 0 20px;
+    gap: 15px;
+    animation: scrollCarousel 20s linear infinite;
+    padding: 0;
     will-change: transform;
+    width: max-content;
 }
 
 @keyframes scrollCarousel {
-    0% {
+    from {
         transform: translateX(0);
     }
-    100% {
-        transform: translateX(calc(-100px * 8 - 160px));
+    to {
+        transform: translateX(-50%);
     }
 }
 
 /* Smaller card container for inline display */
 .transformation-card {
     flex: 0 0 auto;
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
 }
 
 .card-container {
@@ -1109,28 +1113,19 @@ body {
 
     /* Before/After Carousel Mobile Adjustments */
     .before-after-carousel {
-        height: 80px;
-        top: 60%;
+        height: 70px;
+        top: 58%;
     }
 
     .transformation-card {
-        width: 70px;
-        height: 70px;
+        width: 60px;
+        height: 60px;
     }
 
     .carousel-track {
-        gap: 10px;
-        padding: 0 10px;
-        animation: scrollCarousel 10s linear infinite;
-    }
-
-    @keyframes scrollCarousel {
-        0% {
-            transform: translateX(0);
-        }
-        100% {
-            transform: translateX(calc(-70px * 8 - 80px));
-        }
+        gap: 8px;
+        padding: 0;
+        animation: scrollCarousel 15s linear infinite;
     }
 
     .card-container {
