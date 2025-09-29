@@ -500,18 +500,19 @@ body {
 .carousel-track {
     display: flex;
     gap: 20px;
-    animation: scrollCarousel 50s linear infinite;
+    animation: scrollCarousel 80s linear infinite;
     padding: 0 20px;
     will-change: transform;
     width: max-content;
 }
 
 @keyframes scrollCarousel {
-    0% {
-        transform: translateX(100vw);
+    from {
+        transform: translateX(0);
     }
-    100% {
-        transform: translateX(calc(-100% - 20vw));
+    to {
+        /* Move exactly 50% for seamless loop with duplicated content */
+        transform: translateX(-50%);
     }
 }
 
@@ -1120,7 +1121,7 @@ body {
     .carousel-track {
         gap: 15px;
         padding: 0 15px;
-        animation: scrollCarousel 40s linear infinite;
+        animation: scrollCarousel 60s linear infinite;
     }
 
     .card-container {
