@@ -475,29 +475,27 @@ body {
     z-index: 1;
 }
 
-/* Fade out with breath effect when carousel comes */
+/* Slide out left when carousel starts */
 .slide-out-left {
-    animation: breatheOut 1s ease-out 2.5s forwards;
+    animation: slideToLeft 2s ease-out 2s forwards;
 }
 
-@keyframes breatheOut {
+@keyframes slideToLeft {
     to {
-        transform: scale(0.9);
+        transform: translateX(-200%);
         opacity: 0;
-        visibility: hidden;
     }
 }
 
-/* Before/After Carousel - Below title, above subtitle */
+/* Before/After Carousel - Full width */
 .before-after-carousel {
     position: absolute;
     top: 55%;
     left: 0;
-    right: 0;
-    width: 100vw;
+    width: 100%;
     transform: translateY(-50%);
     opacity: 0;
-    animation: fadeInCarousel 1s ease-out 3s forwards;
+    animation: fadeInCarousel 0.5s ease-out 2s forwards;
     overflow: hidden;
     height: 100px;
     display: flex;
@@ -514,18 +512,18 @@ body {
 .carousel-track {
     display: flex;
     gap: 15px;
-    animation: scrollCarousel 20s linear infinite;
-    padding: 0;
+    animation: scrollLeftToRight 25s linear infinite;
+    padding: 0 15px;
     will-change: transform;
     width: max-content;
 }
 
-@keyframes scrollCarousel {
+@keyframes scrollLeftToRight {
     from {
-        transform: translateX(0);
+        transform: translateX(100%);
     }
     to {
-        transform: translateX(-50%);
+        transform: translateX(-100%);
     }
 }
 
