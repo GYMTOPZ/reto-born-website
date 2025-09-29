@@ -50,6 +50,18 @@ Website para Reto Born con animaciones únicas para cada sección.
 - `falling-animation.js` - Animación de partículas para "Reto Born"
 - `supabase-config.js` - Configuración de Supabase para waitlist
 
+### 6. Sección "Nutrición inteligente" - Animación o → manzana
+- La letra "ó" de "Nutrición" se transforma en manzana
+- Animación de 4 segundos con rotación 3D
+- Detalles:
+  - La "o" es un círculo azul con borde (0.54em)
+  - Se transforma en manzana roja con gradiente
+  - El acento se convierte en hoja verde
+  - Acento inclinado de izquierda a derecha (-20°)
+  - Altura fija en top: 30% (sin movimiento vertical)
+  - Solo cambia color y forma, no posición
+- Ciclo: 1s letra → 0.6s transformación → 1.4s manzana → 0.6s transformación → 0.4s letra
+
 ## Notas Técnicas
 - Todas las animaciones usan CSS @keyframes para mejor performance
 - JavaScript mínimo, principalmente para typewriter e IntersectionObserver
