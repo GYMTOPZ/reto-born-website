@@ -557,8 +557,11 @@ function initFallingAnimation() {
                     animateParticles();
                     playImpactSound();
 
-                    // Screen shake effect
-                    document.body.style.animation = 'screenShake 0.3s';
+                    // Screen shake effect - only for hero section
+                    const heroSection = document.querySelector('.hero');
+                    if (heroSection) {
+                        heroSection.style.animation = 'screenShake 0.3s';
+                    }
 
                     // Small bounce effect after impact
                     element.style.transition = 'transform 0.15s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
@@ -567,7 +570,11 @@ function initFallingAnimation() {
                     setTimeout(() => {
                         element.style.transition = 'transform 0.2s ease-out';
                         element.style.transform = 'scale(1)';
-                        document.body.style.animation = '';
+                        // Clear shake animation from hero
+                        const heroSection = document.querySelector('.hero');
+                        if (heroSection) {
+                            heroSection.style.animation = '';
+                        }
                     }, 150);
                 }, 800);
             }, 50);
