@@ -211,11 +211,11 @@ body {
     width: 0.12em;
     height: 0.18em;
     background: var(--apple-blue);
-    border-radius: 0 100% 0 100%;
-    left: 54%;
-    top: 32%;
+    border-radius: 100% 0 100% 0;
+    left: 50%;
+    top: 30%;
     transform-origin: bottom center;
-    transform: rotate(15deg);
+    transform: rotate(-20deg);
     animation: accentToLeaf 4s infinite;
 }
 
@@ -260,42 +260,43 @@ body {
 @keyframes accentToLeaf {
     0%, 25% {
         /* Accent mark */
-        width: 0.15em;
-        height: 0.2em;
+        width: 0.12em;
+        height: 0.18em;
         background: var(--apple-blue);
-        border-radius: 0 100% 0 100%;
-        transform: rotate(15deg);
+        border-radius: 100% 0 100% 0;
+        transform: rotate(-20deg);
     }
     35%, 40% {
         /* Transform to leaf on top of apple */
         width: 0.14em;
         height: 0.1em;
         background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%);
-        border-radius: 0 100% 0 100%;
-        transform: rotate(15deg) translateY(-0.35em) translateX(0.02em);
+        border-radius: 100% 0 100% 0;
+        transform: rotate(-20deg);
     }
     50%, 75% {
         /* Stay as leaf on top of apple */
         width: 0.14em;
         height: 0.1em;
         background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%);
-        border-radius: 0 100% 0 100%;
-        transform: rotate(15deg) translateY(-0.35em) translateX(0.02em);
+        border-radius: 100% 0 100% 0;
+        transform: rotate(-20deg);
     }
     85%, 90% {
         /* Transform back to accent */
-        width: 0.15em;
-        height: 0.2em;
+        width: 0.12em;
+        height: 0.18em;
         background: var(--apple-blue);
-        transform: rotate(15deg);
+        border-radius: 100% 0 100% 0;
+        transform: rotate(-20deg);
     }
     100% {
         /* Back to accent */
-        width: 0.15em;
-        height: 0.2em;
+        width: 0.12em;
+        height: 0.18em;
         background: var(--apple-blue);
-        border-radius: 0 100% 0 100%;
-        transform: rotate(15deg);
+        border-radius: 100% 0 100% 0;
+        transform: rotate(-20deg);
     }
 }
 
