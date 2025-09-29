@@ -167,8 +167,101 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollObserver.observe(element);
     });
 
-    // Carousel is always visible and running - no need for observer
+    // Interactive carousel controls
+    initInteractiveCarousel();
 });
+
+// Interactive carousel with touch/mouse controls
+function initInteractiveCarousel() {
+    const carousel = document.querySelector('.carousel-track');
+    if (!carousel) return;
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+    let currentX = 0;
+    let animationPaused = false;
+    let autoScrollSpeed = 1; // pixels per frame
+    let rafId;
+
+    // Get current transform value
+    function getCurrentTransform() {
+        const style = window.getComputedStyle(carousel);
+        const matrix = style.transform;
+        if (matrix === 'none') return 0;
+        const values = matrix.split('(')[1].split(')')[0].split(',');
+        return parseFloat(values[4]) || 0;
+    }
+
+    // Auto-scroll function
+    function autoScroll() {
+        if (!isDown && !animationPaused) {
+            currentX -= autoScrollSpeed;
+            carousel.style.transform = `translateX(${currentX}px)`;
+
+            // Reset when reaching half (for infinite loop)
+            const carouselWidth = carousel.scrollWidth / 2;
+            if (Math.abs(currentX) >= carouselWidth) {
+                currentX = 0;
+            }
+        }
+        rafId = requestAnimationFrame(autoScroll);
+    }
+
+    // Start auto-scroll
+    currentX = getCurrentTransform();
+    carousel.style.animation = 'none'; // Disable CSS animation
+    autoScroll();
+
+    // Mouse events
+    carousel.addEventListener('mousedown', (e) => {
+        isDown = true;
+        carousel.style.cursor = 'grabbing';
+        startX = e.pageX;
+        scrollLeft = currentX;
+    });
+
+    carousel.addEventListener('mouseleave', () => {
+        isDown = false;
+        carousel.style.cursor = 'grab';
+    });
+
+    carousel.addEventListener('mouseup', () => {
+        isDown = false;
+        carousel.style.cursor = 'grab';
+    });
+
+    carousel.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX;
+        const walk = (x - startX) * 2; // Multiply for faster scroll
+        currentX = scrollLeft + walk;
+        carousel.style.transform = `translateX(${currentX}px)`;
+    });
+
+    // Touch events
+    carousel.addEventListener('touchstart', (e) => {
+        isDown = true;
+        startX = e.touches[0].pageX;
+        scrollLeft = currentX;
+    });
+
+    carousel.addEventListener('touchend', () => {
+        isDown = false;
+    });
+
+    carousel.addEventListener('touchmove', (e) => {
+        if (!isDown) return;
+        const x = e.touches[0].pageX;
+        const walk = (x - startX) * 2;
+        currentX = scrollLeft + walk;
+        carousel.style.transform = `translateX(${currentX}px)`;
+    });
+
+    // Add cursor style
+    carousel.style.cursor = 'grab';
+}
 
 // Smooth scrolling for any anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
