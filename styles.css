@@ -494,7 +494,7 @@ body {
     width: 100vw;
     opacity: 1;
     overflow: hidden;
-    height: 120px;
+    height: 220px;
     display: flex;
     align-items: center;
     z-index: 10;
@@ -504,28 +504,27 @@ body {
 
 .carousel-track {
     display: flex;
-    gap: 15px;
-    animation: scrollInfinite 30s linear infinite;
-    padding: 0 15px;
+    gap: 20px;
+    position: absolute;
+    animation: scrollInfinite 40s linear infinite;
+    padding: 0 20px;
     will-change: transform;
-    width: max-content;
 }
 
 @keyframes scrollInfinite {
-    0% {
-        transform: translateX(100vw);
+    from {
+        transform: translateX(100%);
     }
-    100% {
-        /* Move all the way across and off the left side */
-        transform: translateX(calc(-50% - 100vw));
+    to {
+        transform: translateX(-100%);
     }
 }
 
-/* Smaller card container for inline display */
+/* Double size card container */
 .transformation-card {
     flex: 0 0 auto;
-    width: 90px;
-    height: 90px;
+    width: 200px;
+    height: 200px;
 }
 
 .card-container {
@@ -1105,7 +1104,7 @@ body {
 
     /* Before/After Carousel Mobile Adjustments */
     .before-after-carousel {
-        height: 80px;
+        height: 160px;
         margin-top: 20px;
         margin-bottom: 10px;
     }
@@ -1119,14 +1118,14 @@ body {
     }
 
     .transformation-card {
-        width: 60px;
-        height: 60px;
+        width: 140px;
+        height: 140px;
     }
 
     .carousel-track {
-        gap: 8px;
-        padding: 0;
-        animation: scrollInfinite 20s linear infinite;
+        gap: 15px;
+        padding: 0 15px;
+        animation: scrollInfinite 35s linear infinite;
     }
 
     .card-container {
