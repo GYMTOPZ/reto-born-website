@@ -185,17 +185,17 @@ body {
 .apple-transform {
     display: inline-block;
     position: relative;
-    width: 0.52em;
+    width: 0.58em;
     height: 0.9em;
-    margin: 0 0.02em;
+    margin: 0 0.01em;
     vertical-align: baseline;
 }
 
 /* The circular shape for both o and apple */
 .o-circle {
     position: absolute;
-    width: 0.48em;
-    height: 0.48em;
+    width: 0.54em;
+    height: 0.54em;
     border: 0.085em solid var(--apple-blue);
     border-radius: 50%;
     left: 50%;
@@ -214,7 +214,7 @@ body {
     border-radius: 0 100% 0 100%;
     left: 54%;
     top: 32%;
-    transform-origin: bottom left;
+    transform-origin: bottom center;
     transform: rotate(15deg);
     animation: accentToLeaf 4s infinite;
 }
@@ -267,20 +267,20 @@ body {
         transform: rotate(15deg);
     }
     35%, 40% {
-        /* Transform to leaf */
-        width: 0.15em;
-        height: 0.12em;
+        /* Transform to leaf on top of apple */
+        width: 0.14em;
+        height: 0.1em;
         background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%);
         border-radius: 0 100% 0 100%;
-        transform: rotate(25deg) translateY(-0.03em);
+        transform: rotate(15deg) translateY(-0.35em) translateX(0.02em);
     }
     50%, 75% {
-        /* Stay as leaf */
-        width: 0.15em;
-        height: 0.12em;
+        /* Stay as leaf on top of apple */
+        width: 0.14em;
+        height: 0.1em;
         background: linear-gradient(90deg, #27ae60 0%, #2ecc71 100%);
         border-radius: 0 100% 0 100%;
-        transform: rotate(25deg) translateY(-0.03em);
+        transform: rotate(15deg) translateY(-0.35em) translateX(0.02em);
     }
     85%, 90% {
         /* Transform back to accent */
