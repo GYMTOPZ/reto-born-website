@@ -145,6 +145,27 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.scroll-fade').forEach(element => {
         scrollObserver.observe(element);
     });
+
+    // Start carousel animation when community section is in view
+    const communitySection = document.querySelector('.community-section');
+    if (communitySection) {
+        const carouselObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const carousel = entry.target.querySelector('.before-after-carousel');
+                    const subtitle = entry.target.querySelector('.slide-out-left');
+                    if (carousel) {
+                        carousel.style.opacity = '1';
+                    }
+                    if (subtitle) {
+                        subtitle.classList.add('animate');
+                    }
+                }
+            });
+        }, { threshold: 0.3 });
+
+        carouselObserver.observe(communitySection);
+    }
 });
 
 // Smooth scrolling for any anchor links

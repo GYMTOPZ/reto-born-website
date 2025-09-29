@@ -475,9 +475,9 @@ body {
     z-index: 1;
 }
 
-/* Slide out left gradually with carousel */
+/* Slide out left immediately when section is visible */
 .slide-out-left {
-    animation: slideToLeft 3s ease-in-out 2s forwards;
+    animation: slideToLeft 2s ease-in-out 0.5s forwards;
 }
 
 @keyframes slideToLeft {
@@ -502,8 +502,7 @@ body {
     left: 0;
     width: 100%;
     transform: translateY(-50%);
-    opacity: 0;
-    animation: fadeInCarousel 0.5s ease-out 2s forwards;
+    opacity: 1;
     overflow: hidden;
     height: 100px;
     display: flex;
@@ -511,27 +510,22 @@ body {
     z-index: 10;
 }
 
-@keyframes fadeInCarousel {
-    to {
-        opacity: 1;
-    }
-}
-
 .carousel-track {
     display: flex;
     gap: 15px;
-    animation: scrollLeftToRight 25s linear infinite;
+    animation: scrollInfinite 30s linear infinite;
     padding: 0 15px;
     will-change: transform;
     width: max-content;
 }
 
-@keyframes scrollLeftToRight {
-    from {
-        transform: translateX(100%);
+@keyframes scrollInfinite {
+    0% {
+        transform: translateX(0);
     }
-    to {
-        transform: translateX(-100%);
+    100% {
+        /* Move by exactly half the total width to create seamless loop */
+        transform: translateX(calc(-50% - 7.5px));
     }
 }
 
@@ -1131,7 +1125,7 @@ body {
     .carousel-track {
         gap: 8px;
         padding: 0;
-        animation: scrollCarousel 15s linear infinite;
+        animation: scrollInfinite 20s linear infinite;
     }
 
     .card-container {
