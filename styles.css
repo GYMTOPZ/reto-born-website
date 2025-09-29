@@ -440,31 +440,29 @@ body {
 .typewriter-title {
     min-height: 3em;
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: block;
     text-align: center;
     max-width: 800px;
     margin: 0 auto;
     padding: 0 40px;
     line-height: 1.2;
-    flex-wrap: wrap;
 }
 
 .typewriter-text {
-    display: inline;
     color: var(--apple-blue);
     word-wrap: break-word;
-    max-width: 100%;
 }
 
 .typewriter-cursor {
     display: inline-block;
-    color: var(--apple-blue);
+    width: 2px;
+    height: 1.1em;
+    background-color: var(--apple-blue);
     animation: cursorBlink 1s infinite;
     margin-left: 2px;
-    font-weight: 400;
-    vertical-align: baseline;
+    vertical-align: text-top;
+    position: relative;
+    top: 0.15em;
 }
 
 @keyframes cursorBlink {
@@ -670,7 +668,7 @@ body {
     }
 
     .typewriter-cursor {
-        font-size: inherit;
-        margin-left: 1px;
+        width: 2px;
+        height: 1em;
     }
 }
