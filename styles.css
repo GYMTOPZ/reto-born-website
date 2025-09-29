@@ -461,12 +461,13 @@ body {
 .typewriter-cursor {
     display: inline-block;
     width: 3px;
-    height: 1.4em;
+    height: 1.2em;
     background-color: var(--apple-blue);
     animation: cursorBlink 1s infinite;
-    margin-left: 4px;
-    vertical-align: text-bottom;
-    flex-shrink: 0;
+    margin-left: 2px;
+    vertical-align: baseline;
+    position: relative;
+    top: 0.1em;
 }
 
 @keyframes cursorBlink {
@@ -672,7 +673,8 @@ body {
     }
 
     .typewriter-cursor {
-        width: 3px;
-        height: 1.3em;
+        width: 2px;
+        height: 1.1em;
+        margin-left: 2px;
     }
 }

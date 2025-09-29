@@ -3,7 +3,8 @@
 // Typewriter effect for "Emilio siempre contigo"
 function initTypewriter() {
     const typewriterElement = document.querySelector('.typewriter-text');
-    if (!typewriterElement) return;
+    const cursorElement = document.querySelector('.typewriter-cursor');
+    if (!typewriterElement || !cursorElement) return;
 
     const phrases = [
         "Emilio siempre contigo",
@@ -18,12 +19,22 @@ function initTypewriter() {
     let isDeleting = false;
     let isPaused = false;
 
+    // Create a wrapper span for text + cursor
+    function updateDisplay(text) {
+        typewriterElement.innerHTML = text;
+        // Move cursor right after the text
+        if (cursorElement.parentNode) {
+            typewriterElement.appendChild(cursorElement);
+        }
+    }
+
     function type() {
         const currentPhrase = phrases[currentPhraseIndex];
 
         if (!isDeleting) {
             // Typing
-            typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex + 1);
+            const displayText = currentPhrase.substring(0, currentCharIndex + 1);
+            updateDisplay(displayText);
             currentCharIndex++;
 
             if (currentCharIndex === currentPhrase.length) {
@@ -38,7 +49,8 @@ function initTypewriter() {
             }
         } else {
             // Deleting
-            typewriterElement.textContent = currentPhrase.substring(0, currentCharIndex - 1);
+            const displayText = currentPhrase.substring(0, currentCharIndex - 1);
+            updateDisplay(displayText);
             currentCharIndex--;
 
             if (currentCharIndex === 0) {
