@@ -575,6 +575,15 @@ function initFallingAnimation() {
                         if (heroSection) {
                             heroSection.style.animation = '';
                         }
+
+                        // Add shimmer effect after landing
+                        setTimeout(() => {
+                            element.classList.add('shimmer');
+                            // Remove shimmer class after animation completes
+                            setTimeout(() => {
+                                element.classList.remove('shimmer');
+                            }, 2000);
+                        }, 300);
                     }, 150);
                 }, 800);
             }, 50);
