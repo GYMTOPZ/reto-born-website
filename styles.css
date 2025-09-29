@@ -302,16 +302,16 @@ body {
 
 /* Cardio Animation Container */
 .cardio-animation-container {
-    position: absolute;
+    position: relative;
     width: 100vw;
-    height: 60px;
+    height: 80px;
     left: 50%;
     transform: translateX(-50%);
     overflow: hidden;
     z-index: 1;
     pointer-events: none;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 /* Sport Figures Base */
@@ -455,6 +455,12 @@ body {
 .feature.alt .feature-title {
     position: relative;
     z-index: 10;
+}
+
+/* Ensure proper spacing for Cardio section */
+.feature.alt .cardio-animation-container + .feature-text {
+    position: relative;
+    z-index: 5;
 }
 
 /* Coming Soon Badge */
@@ -945,9 +951,9 @@ body {
 
     /* Cardio animation adjustments for mobile */
     .cardio-animation-container {
-        height: 50px;
-        margin-top: 5px;
-        margin-bottom: 5px;
+        height: 60px;
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     .sport-figure {
