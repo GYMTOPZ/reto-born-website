@@ -1077,8 +1077,14 @@ body {
 
 /* Mobile */
 @media (max-width: 768px) {
+    /* Disable scroll snap on mobile for better control */
+    html {
+        scroll-snap-type: none;
+    }
+
     .hero {
         padding: 0 20px;
+        scroll-snap-align: none;
     }
 
     .hero-title {
@@ -1109,6 +1115,7 @@ body {
     .feature {
         min-height: 80vh;
         padding: 60px 20px;
+        scroll-snap-align: none;
     }
 
     .feature-content {
@@ -1139,6 +1146,10 @@ body {
         font-size: 48px;
         font-weight: 800;
         letter-spacing: -0.03em;
+    }
+
+    .download {
+        scroll-snap-align: none;
     }
 
     .download-content {
@@ -1194,6 +1205,10 @@ body {
         position: relative;
         top: 0;
         margin-left: 1px;
+    }
+
+    .footer {
+        scroll-snap-align: none;
     }
 
     /* Before/After Carousel Mobile Adjustments */
