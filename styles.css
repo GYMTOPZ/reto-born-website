@@ -305,12 +305,11 @@ body {
     position: fixed;
     width: 100vw;
     height: 100px;
-    top: 50%;
+    top: 52%;
     left: 0;
     transform: translateY(-50%);
     overflow: hidden;
     z-index: 1;
-    opacity: 0.15;
     pointer-events: none;
 }
 
@@ -321,26 +320,47 @@ body {
     color: var(--apple-blue);
     top: 50%;
     transform: translateY(-50%);
-    opacity: 0.4;
+    opacity: 0.6;
 }
 
 /* Runner Figure */
 .sport-figure.runner {
     left: -100px;
-    animation: moveAcrossScreen 15s infinite linear, runningMotion 0.6s infinite;
+    animation: moveAcrossScreen 12s infinite linear, runningMotion 0.6s infinite;
 }
 
 /* Cyclist Figure */
 .sport-figure.cyclist {
     left: -100px;
-    animation: moveAcrossScreen 15s infinite linear, cyclingMotion 0.8s infinite;
-    animation-delay: 5s;
+    animation: moveAcrossScreen 12s infinite linear, cyclingMotion 0.8s infinite;
+    animation-delay: 2s;
 }
 
 /* Swimmer Figure */
 .sport-figure.swimmer {
     left: -100px;
-    animation: moveAcrossScreen 15s infinite linear, swimmingMotion 1s infinite;
+    animation: moveAcrossScreen 12s infinite linear, swimmingMotion 1s infinite;
+    animation-delay: 4s;
+}
+
+/* Walker Figure */
+.sport-figure.walker {
+    left: -100px;
+    animation: moveAcrossScreen 12s infinite linear, walkingMotion 1s infinite;
+    animation-delay: 6s;
+}
+
+/* Jumper Figure */
+.sport-figure.jumper {
+    left: -100px;
+    animation: moveAcrossScreen 12s infinite linear, jumpingMotion 0.5s infinite;
+    animation-delay: 8s;
+}
+
+/* Hiker Figure */
+.sport-figure.hiker {
+    left: -100px;
+    animation: moveAcrossScreen 12s infinite linear, hikingMotion 0.9s infinite;
     animation-delay: 10s;
 }
 
@@ -387,6 +407,42 @@ body {
     }
     75% {
         transform: translateY(-52%) rotate(0deg);
+    }
+}
+
+/* Walking Motion */
+@keyframes walkingMotion {
+    0%, 100% {
+        transform: translateY(-50%);
+    }
+    50% {
+        transform: translateY(-52%);
+    }
+}
+
+/* Jumping Motion */
+@keyframes jumpingMotion {
+    0%, 100% {
+        transform: translateY(-50%);
+    }
+    25% {
+        transform: translateY(-60%);
+    }
+    50% {
+        transform: translateY(-50%);
+    }
+    75% {
+        transform: translateY(-55%);
+    }
+}
+
+/* Hiking Motion */
+@keyframes hikingMotion {
+    0%, 100% {
+        transform: translateY(-50%) rotate(-2deg);
+    }
+    50% {
+        transform: translateY(-53%) rotate(2deg);
     }
 }
 
@@ -889,12 +945,12 @@ body {
     /* Cardio animation adjustments for mobile */
     .cardio-animation-container {
         height: 60px;
-        opacity: 0.12;
+        top: 52%;
     }
 
     .sport-figure {
         font-size: 32px;
-        opacity: 0.3;
+        opacity: 0.5;
     }
 
     /* Typewriter adjustments for mobile */
