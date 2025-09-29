@@ -146,22 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scrollObserver.observe(element);
     });
 
-    // Start carousel animation when community section is in view
-    const communitySection = document.querySelector('.community-section');
-    if (communitySection) {
-        const carouselObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const carousel = entry.target.querySelector('.before-after-carousel');
-                    if (carousel) {
-                        carousel.style.opacity = '1';
-                    }
-                }
-            });
-        }, { threshold: 0.3 });
-
-        carouselObserver.observe(communitySection);
-    }
+    // Carousel is always visible and running - no need for observer
 });
 
 // Smooth scrolling for any anchor links

@@ -506,17 +506,18 @@ body {
     display: flex;
     gap: 20px;
     position: absolute;
-    animation: scrollInfinite 40s linear infinite;
+    left: 0;
+    animation: scrollInfinite 25s linear infinite;
     padding: 0 20px;
     will-change: transform;
 }
 
 @keyframes scrollInfinite {
-    from {
-        transform: translateX(100%);
+    0% {
+        transform: translateX(100vw);
     }
-    to {
-        transform: translateX(-100%);
+    100% {
+        transform: translateX(calc(-100% - 20px));
     }
 }
 
@@ -1125,7 +1126,7 @@ body {
     .carousel-track {
         gap: 15px;
         padding: 0 15px;
-        animation: scrollInfinite 35s linear infinite;
+        animation: scrollInfinite 20s linear infinite;
     }
 
     .card-container {
