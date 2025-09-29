@@ -187,9 +187,9 @@ function initFallingAnimation() {
                 this.vy = (Math.random() - 0.5) * 4;
             }
 
-            this.size = Math.random() * 30 + 25; // Big, dense smoke clouds
+            this.size = Math.random() * 20 + 15; // Smaller smoke clouds
             this.life = 1;
-            this.decay = Math.random() * 0.0015 + 0.001; // Very slow fade
+            this.decay = Math.random() * 0.008 + 0.006; // Faster fade
             // Denser smoke colors
             const smokeColors = [
                 'rgba(140,140,140,0.7)',
@@ -217,12 +217,12 @@ function initFallingAnimation() {
 
             this.life -= this.decay;
             // Smoke expands as it moves outward
-            this.size += 0.25;
+            this.size += 0.15;
         }
 
         draw(ctx) {
             ctx.save();
-            ctx.globalAlpha = this.life * 0.7; // More opaque smoke
+            ctx.globalAlpha = this.life * 0.4; // Less opaque smoke
 
             // Create multi-layered gradient for dense, realistic smoke
             const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
@@ -295,14 +295,14 @@ function initFallingAnimation() {
         // This simulates the letter shape "exploding" outward
 
         // Top edge particles
-        for (let i = 0; i < width; i += 4) {
+        for (let i = 0; i < width; i += 8) { // Less frequent
             const x = rect.left + i;
             const y = rect.top;
             const dirX = (x - centerX) / width;
             const dirY = -1; // Upward from top
 
             // Smoke expanding from top edge
-            if (Math.random() > 0.3) {
+            if (Math.random() > 0.6) { // Less smoke
                 particles.push(new Smoke(x, y, dirX, dirY));
             }
 
@@ -316,14 +316,16 @@ function initFallingAnimation() {
         }
 
         // Bottom edge particles - MOST INTENSE
-        for (let i = 0; i < width; i += 3) {
+        for (let i = 0; i < width; i += 6) { // Reduced frequency
             const x = rect.left + i;
             const y = rect.bottom;
             const dirX = (x - centerX) / width;
             const dirY = 1; // Downward from bottom
 
             // Dense smoke from bottom impact
-            particles.push(new Smoke(x, y, dirX, dirY));
+            if (Math.random() > 0.2) { // Some randomness
+                particles.push(new Smoke(x, y, dirX, dirY));
+            }
 
             // More debris from bottom (main impact)
             if (Math.random() > 0.2) {
@@ -341,14 +343,14 @@ function initFallingAnimation() {
         }
 
         // Left edge particles
-        for (let i = 0; i < height; i += 4) {
+        for (let i = 0; i < height; i += 8) { // Less frequent
             const x = rect.left;
             const y = rect.top + i;
             const dirX = -1; // Leftward from left edge
             const dirY = (y - centerY) / height;
 
             // Smoke from left edge
-            if (Math.random() > 0.4) {
+            if (Math.random() > 0.7) { // Much less smoke
                 particles.push(new Smoke(x, y, dirX, dirY));
             }
 
@@ -362,14 +364,14 @@ function initFallingAnimation() {
         }
 
         // Right edge particles
-        for (let i = 0; i < height; i += 4) {
+        for (let i = 0; i < height; i += 8) { // Less frequent
             const x = rect.right;
             const y = rect.top + i;
             const dirX = 1; // Rightward from right edge
             const dirY = (y - centerY) / height;
 
             // Smoke from right edge
-            if (Math.random() > 0.4) {
+            if (Math.random() > 0.7) { // Much less smoke
                 particles.push(new Smoke(x, y, dirX, dirY));
             }
 
@@ -392,7 +394,7 @@ function initFallingAnimation() {
 
         corners.forEach(corner => {
             // Extra smoke at corners
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 2; i++) { // Much less smoke at corners
                 particles.push(new Smoke(
                     corner.x + (Math.random() - 0.5) * 5,
                     corner.y + (Math.random() - 0.5) * 5,
