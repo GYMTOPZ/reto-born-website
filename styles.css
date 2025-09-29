@@ -470,58 +470,48 @@ body {
 }
 
 .community-section .feature-content {
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     height: 100%;
 }
 
 .community-section .feature-title {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    z-index: 2;
+    margin-bottom: 40px;
 }
 
 .community-section .feature-text {
-    position: absolute;
-    bottom: 10%;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1;
-    text-align: center;
+    margin-top: 40px;
 }
 
 /* Before/After Carousel - Full width */
 .before-after-carousel {
-    position: absolute;
-    top: 50%;
-    left: 0;
+    position: relative;
     width: 100vw;
-    transform: translateY(-50%);
+    margin-left: calc(-50vw + 50%);
     opacity: 1;
     overflow: hidden;
     height: 220px;
     display: flex;
     align-items: center;
-    z-index: 10;
 }
 
 .carousel-track {
     display: flex;
     gap: 20px;
-    position: absolute;
     animation: scrollCarousel 50s linear infinite;
     padding: 0 20px;
     will-change: transform;
+    width: max-content;
 }
 
 @keyframes scrollCarousel {
-    from {
+    0% {
         transform: translateX(100vw);
     }
-    to {
-        transform: translateX(calc(-100% - 20px));
+    100% {
+        transform: translateX(calc(-100% - 20vw));
     }
 }
 
@@ -1114,12 +1104,12 @@ body {
         margin-bottom: 10px;
     }
 
-    .community-section .feature-content {
-        gap: 15px;
+    .community-section .feature-title {
+        margin-bottom: 20px;
     }
 
     .community-section .feature-text {
-        margin-top: 10px;
+        margin-top: 20px;
     }
 
     .transformation-card {
